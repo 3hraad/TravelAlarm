@@ -11,11 +11,10 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6496c776-eff0-4f84-9256-490b51f07528" name="Default" comment="load bus time async - markermap&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/ReceiveTransitionsIntentService.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/ReceiveTransitionsIntentService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/WidgetProvider.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/WidgetProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/widget_layout.xml" afterPath="$PROJECT_DIR$/res/layout/widget_layout.xml" />
+    <list default="true" id="6496c776-eff0-4f84-9256-490b51f07528" name="Default" comment="Audio for geofence, test activity for geofence alarm">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/raw/audio.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/TriggeredGeofence.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/test.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Travel Alarm.iws" />
@@ -115,7 +114,7 @@
       <file leaf-file-name="TriggeredGeofence.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/TriggeredGeofence.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="19" selection-start="285" selection-end="285" vertical-scroll-proportion="0.5543478" vertical-offset="0" max-vertical-offset="595">
+            <state line="8" column="0" selection-start="176" selection-end="176" vertical-scroll-proportion="0.33333334" vertical-offset="13" max-vertical-offset="595">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#600#743#0" expanded="true" />
@@ -578,10 +577,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32956383" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2306003" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -592,7 +591,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3279483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3279483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6575121" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -614,7 +613,9 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="load bus time async - markermap" />
-    <option name="LAST_COMMIT_MESSAGE" value="load bus time async - markermap" />
+    <MESSAGE value="Geofence trigger, simple widget" />
+    <MESSAGE value="Audio for geofence, test activity for geofence alarm" />
+    <option name="LAST_COMMIT_MESSAGE" value="Audio for geofence, test activity for geofence alarm" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1035,6 +1036,15 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/WidgetProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="2" selection-start="4871" selection-end="4871" vertical-scroll-proportion="0.0" vertical-offset="1519" max-vertical-offset="2091">
+          <folding>
+            <element signature="method#getBusInfo#0;class#WidgetProvider#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/test.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
@@ -1045,18 +1055,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/WidgetProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="2" selection-start="4871" selection-end="4871" vertical-scroll-proportion="0.0" vertical-offset="1519" max-vertical-offset="2091">
-          <folding>
-            <element signature="method#getBusInfo#0;class#WidgetProvider#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/TriggeredGeofence.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="19" selection-start="285" selection-end="285" vertical-scroll-proportion="0.5543478" vertical-offset="0" max-vertical-offset="595">
+        <state line="8" column="0" selection-start="176" selection-end="176" vertical-scroll-proportion="0.33333334" vertical-offset="13" max-vertical-offset="595">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#600#743#0" expanded="true" />
