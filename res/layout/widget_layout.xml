@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+    <TextView
+            android:textSize="22dp"
+            android:id="@+id/tvBusNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="000"
+            android:textColor="#ff000000"
+            android:background="#ffffffff"
+            android:layout_below="@+id/tvLastUpdated" android:layout_alignParentLeft="true"/>
+    <TextView
+            android:textSize="22dp"
+            android:id="@+id/tvBusDest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Bus information "
+            android:textColor="#ff000000"
+            android:background="#ffffffff"
+            android:layout_marginLeft="12dp" android:layout_below="@+id/tvLastUpdated"
+            android:layout_toRightOf="@+id/tvBusNo"/>
+    <TextView
+            android:id="@+id/tvBusETA"
+            android:textSize="22dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 Min"
+            android:textColor="#ff000000"
+            android:background="#ffffffff"
+            android:gravity="right" android:layout_above="@+id/tvBusDest1" android:layout_toRightOf="@+id/tvBusDest"
+            android:layout_alignParentRight="true"/>
+
+
+
+    <TextView
+            android:textSize="22dp"
+            android:id="@+id/tvBusNo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="000"
+            android:textColor="#ff000000"
+            android:background="#ffffffff"
+            android:layout_below="@+id/tvBusNo" android:layout_toLeftOf="@+id/tvBusDest"/>
+    <TextView
+            android:textSize="22dp"
+            android:id="@+id/tvBusDest1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Bus  Found"
+            android:textColor="#ff000000"
+            android:background="#ffffffff"
+            android:layout_alignBaseline="@+id/tvBusNo1" android:layout_alignBottom="@+id/tvBusNo1"
+            android:layout_alignLeft="@+id/tvBusDest"/>
+    <TextView
+            android:id="@+id/tvBusETA1"
+            android:textSize="22dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="120 Min"
+            android:textColor="#ff000000"
+            android:background="#ffffffff"
+            android:gravity="right" android:layout_below="@+id/tvBusETA" android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/tvBusDest1"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Updated"
+            android:id="@+id/tvLastUpdated"
+            android:layout_alignParentTop="true" android:layout_alignParentLeft="true"/>
+</RelativeLayout>
+

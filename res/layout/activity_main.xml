@@ -1,0 +1,71 @@
+
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+
+    >
+
+    <Button
+        android:id="@+id/bBusAlarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bus Alarm" />
+
+    <Button
+            android:id="@+id/bGPSAlarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GPS Alarm" />
+
+    <Button
+            android:id="@+id/bGCMtest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GCM test" />
+
+    <Button
+            android:id="@+id/bGCMreg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GCM register" />
+
+
+
+
+    <TextView
+        android:id="@+id/testView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set most recent address"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etDumbAddress"/>
+
+    <Button
+            android:id="@+id/bSubmitAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add address to DB" />
+    <Button
+            android:id="@+id/bViewAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dummy GCM" />
+
+
+</LinearLayout>
+
+    
+    
+    
