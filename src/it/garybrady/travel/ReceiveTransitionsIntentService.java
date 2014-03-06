@@ -110,7 +110,7 @@ public class ReceiveTransitionsIntentService extends IntentService {
     }
 
    private void sendNotification(String transitionType, String ids) {
-    Intent i = new Intent(this, MyActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    Intent i = new Intent(this, TriggeredGeofence.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
        startActivity(i);
 }
 

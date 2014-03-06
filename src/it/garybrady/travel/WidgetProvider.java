@@ -132,7 +132,7 @@ public class WidgetProvider extends AppWidgetProvider {
             e.printStackTrace();
         }
 
-         views.setTextViewText(R.id.tvLastUpdated, date);
+        views.setTextViewText(R.id.tvLastUpdated, date);
 
         //tell that widget manager
         appWidgetManager.updateAppWidget(appWidgetId,views);
