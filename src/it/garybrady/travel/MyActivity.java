@@ -52,7 +52,7 @@ public class MyActivity extends Activity {
         sampleGeofence.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gps = new Intent(MyActivity.this, LongGeofence.class);
+                Intent gps = new Intent(MyActivity.this, MapLongGeofence.class);
                 startActivity(gps);
             }
         });
