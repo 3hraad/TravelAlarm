@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.widget.*;
@@ -202,7 +203,14 @@ public class MapLongGeofence extends FragmentActivity implements
         setAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Create Bundle to pass to LongGeofence
+                Bundle b = new Bundle();
+                b.putDouble("lat", marker.getPosition().latitude);
+                b.putDouble("lng", marker.getPosition().longitude);
+                b.putDouble("radius", circle.getRadius());
+                Intent i = new Intent(MapLongGeofence.this,GeofenceConstruct.class);
+                i.putExtras(b);
+                startActivity(i);
+                finish();
             }
         });
     }
