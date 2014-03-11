@@ -64,7 +64,8 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme" >
 
-        <!--GCM
+
+    <!--GCM
         <receiver
                 android:name=".GcmBroadcastReceiver"
                 android:permission="com.google.android.c2dm.permission.SEND" >

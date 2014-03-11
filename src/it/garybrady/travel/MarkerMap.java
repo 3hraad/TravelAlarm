@@ -7,7 +7,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.widget.*;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -30,6 +32,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
+import android.content.SharedPreferences.Editor;
+
 
 import it.garybrady.travel.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -121,7 +125,23 @@ public class MarkerMap extends FragmentActivity implements
         });
 
 
+       ImageView refresh =(ImageView) findViewById(R.id.ivReload);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                realBusTimeInfo = new ArrayList<String>();
+                new loadBusTimeInfo(selectedBus).execute();
 
+            }
+        });
+
+        ImageView widgetSave = (ImageView) findViewById(R.id.ivWidgetSet);
+        widgetSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                savePreferences("busRef",selectedBus);
+            }
+        });
     }
 
     @Override
@@ -129,6 +149,17 @@ public class MarkerMap extends FragmentActivity implements
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    private void savePreferences(String key, String value) {
+
+        SharedPreferences.Editor prefs = getSharedPreferences("busInfo", MODE_PRIVATE).edit();
+        prefs.putString(key, value);
+        prefs.commit();
+
+
+        Toast.makeText(getApplicationContext(),"Saved Bus for Widget",Toast.LENGTH_LONG).show();
+
     }
 
     public boolean servicesOK() {
