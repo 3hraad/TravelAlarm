@@ -100,6 +100,7 @@ public class MarkerMap extends FragmentActivity implements
         sd = (SlidingDrawer) findViewById(R.id.slidingDrawer2);
         plotMarkers();
         //gotoCurrentLocation();
+        mMap.setPadding(0,70,0,0);
         mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
             @Override
@@ -111,13 +112,15 @@ public class MarkerMap extends FragmentActivity implements
                 busInfoList = (ListView) findViewById(R.id.listViewBusTimes);
                 realBusTimeInfo = new ArrayList<String>();
                 //getBusInfo(clickedMarker.getTitle());
-                selectedBus =null;
+                selectedBus =clickedMarker.getTitle();
                // new MyAsyncTask(true).execute(maybe_other_params);
                 new loadBusTimeInfo(clickedMarker.getTitle()).execute();
 
                 return false;
             }
         });
+
+
 
     }
 
@@ -163,7 +166,7 @@ public class MarkerMap extends FragmentActivity implements
 
     public void geoLocate(View v) throws IOException {
 
-        et = (EditText) findViewById(R.id.editText1);
+        et = (EditText) findViewById(R.id.etLongGeoLocate);
         String location = et.getText().toString();
         if (location.length() == 0) {
             Toast.makeText(this, "Please enter a location", Toast.LENGTH_SHORT).show();
@@ -412,6 +415,7 @@ public class MarkerMap extends FragmentActivity implements
         protected void onPreExecute() {
             busInfoList.setAdapter(null);
             loadBusInfo=(ProgressBar)findViewById(R.id.pbLoadBusTimes);
+
             loadBusInfo.setVisibility(View.VISIBLE);
             sd.open();
         }

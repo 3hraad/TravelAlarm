@@ -95,7 +95,7 @@ public class GCMmap extends FragmentActivity implements
 
     public void gcmGoto(String address) throws IOException {
 
-        et = (EditText) findViewById(R.id.editText1);
+        et = (EditText) findViewById(R.id.etLongGeoLocate);
         String location = address.toString();
         if (location.length() == 0) {
             Toast.makeText(this, "No location Received", Toast.LENGTH_SHORT).show();

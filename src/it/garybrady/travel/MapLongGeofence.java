@@ -287,7 +287,7 @@ public class MapLongGeofence extends FragmentActivity implements
 
     public void geoLocate(View v) throws IOException {
 
-        et = (EditText) findViewById(R.id.editText1);
+        et = (EditText) findViewById(R.id.etLongGeoLocate);
         String location = searchedLocation.getText().toString();
         if (location.length() == 0) {
             Toast.makeText(this, "Please enter a location", Toast.LENGTH_SHORT).show();
