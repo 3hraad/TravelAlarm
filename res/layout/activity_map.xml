@@ -94,14 +94,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="50dp"
                         android:src="@drawable/img_refresh"/>
-                <ProgressBar
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:id="@+id/pbLoadBusTimes"
-                        android:layout_centerHorizontal="true"
 
-
-                        android:clickable="false"/>
 
                 <ImageView
                         android:layout_width="50dp"

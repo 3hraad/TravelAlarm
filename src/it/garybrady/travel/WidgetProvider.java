@@ -1,9 +1,12 @@
 package it.garybrady.travel;
 
+import android.app.Application;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -32,13 +35,15 @@ import java.util.Date;
  */
 public class WidgetProvider extends AppWidgetProvider {
     final static int APPWIDGET= 3333;
-
+    static String  ref="241831";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
         //Loop through all widgets to display an update
         final int N=appWidgetIds.length;
+        SharedPreferences prefs = context.getSharedPreferences("busInfo",0);
+        ref= prefs.getString("busRef","0");
         for(int i=0;i<N;i++){
             int appWidgetId=appWidgetIds[i];
             String titlePrefix="Time since the widget was started";
@@ -51,11 +56,14 @@ public class WidgetProvider extends AppWidgetProvider {
     {
         super.onReceive(context, intent);
 
-        String  ref="241831";
+
         String tempBusNo,tempBusDest,tempBusETA;
         String date = "Last Updated :" + (DateFormat.format("dd-MM-yyyy hh:mm:ss", new java.util.Date()).toString());
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+
+        SharedPreferences prefs = context.getSharedPreferences("busInfo",0);
+        ref= prefs.getString("busRef","0");
         JSONArray jArray = getBusInfo(ref);
 
 
@@ -96,8 +104,7 @@ public class WidgetProvider extends AppWidgetProvider {
         ListView busInfoList;
         String  ref="241831";
         String tempBusNo,tempBusDest,tempBusETA;
-
-        String date = "Last Updated :" + (DateFormat.format("dd-MM-yyyy hh:mm:ss", new java.util.Date()).toString());
+        String date = "Last Updated :" + (DateFormat.format("dd-MM-yyyy hh:mm:ss", new java.util.Date()).toString())+"Bus Ref: "+ref;
         CharSequence text=titlePrefix;
         text =text+ " " + minutes + ":" + String.format("%02d",seconds);
 
@@ -137,6 +144,9 @@ public class WidgetProvider extends AppWidgetProvider {
         //tell that widget manager
         appWidgetManager.updateAppWidget(appWidgetId,views);
     }
+
+
+
 
     public static JSONArray getBusInfo(String stopReference){
         String webStopRef="http://192.3.177.209/liveInfo.php?RefNo=";

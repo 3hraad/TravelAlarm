@@ -10,6 +10,8 @@ import java.util.List;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.*;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -62,6 +64,8 @@ public class MarkerMap extends FragmentActivity implements
     String webStopRef="http://192.3.177.209/liveInfo.php?RefNo=";
     String receivedBus=null;
     String selectedBus=null;
+    ImageView refresh;
+    Animation rotation;
 
 
     private static final float DEFAULTZOOM = 15;
@@ -71,7 +75,6 @@ public class MarkerMap extends FragmentActivity implements
     LocationClient mLocationClient;
     Marker marker;
     SlidingDrawer sd;
-    ProgressBar loadBusInfo;
     //WebView wb;
     String webSite="http://www.rtpi.ie/Popup_Content/WebDisplay/WebDisplay.aspx?stopRef=";
     ArrayList<String> realBusTimeInfo;
@@ -125,7 +128,7 @@ public class MarkerMap extends FragmentActivity implements
         });
 
 
-       ImageView refresh =(ImageView) findViewById(R.id.ivReload);
+       refresh =(ImageView) findViewById(R.id.ivReload);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,6 +145,8 @@ public class MarkerMap extends FragmentActivity implements
                 savePreferences("busRef",selectedBus);
             }
         });
+
+
     }
 
     @Override
@@ -445,9 +450,11 @@ public class MarkerMap extends FragmentActivity implements
         @Override
         protected void onPreExecute() {
             busInfoList.setAdapter(null);
-            loadBusInfo=(ProgressBar)findViewById(R.id.pbLoadBusTimes);
 
-            loadBusInfo.setVisibility(View.VISIBLE);
+
+            rotation = AnimationUtils.loadAnimation(MarkerMap.this, R.anim.rotation_clockwise);
+            rotation.setRepeatCount(Animation.INFINITE);
+            refresh.startAnimation(rotation);
             sd.open();
         }
 
@@ -515,8 +522,7 @@ public class MarkerMap extends FragmentActivity implements
         @Override
         protected void onPostExecute(Void aVoid) {
             Toast.makeText(getApplicationContext(),"Times loaded",Toast.LENGTH_LONG).show();
-            loadBusInfo.setVisibility(View.INVISIBLE);
-
+            refresh.clearAnimation();
             //loadBusTimeInfo(clickedMarker.getTitle()).execute;
             ArrayAdapter<String> arrayAdapter=
                     new ArrayAdapter<String>(MarkerMap.this,android.R.layout.simple_list_item_1, realBusTimeInfo );
