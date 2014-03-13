@@ -57,6 +57,15 @@ public class MyActivity extends Activity {
             }
         });
 
+        Button bestBus=(Button)findViewById(R.id.bBestBus);
+        bestBus.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MyActivity.this,BestBusViewPicker.class);
+                startActivity(i);
+            }
+        });
+
         Button gcm = (Button) findViewById(R.id.bGCMtest);
         gcm.setOnClickListener(new OnClickListener() {
             @Override

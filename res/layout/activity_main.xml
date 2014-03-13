@@ -15,10 +15,16 @@
     >
 
     <Button
-        android:id="@+id/bBusAlarm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bus Alarm" />
+            android:id="@+id/bBusAlarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Real Time Bus Info" />
+
+    <Button
+            android:id="@+id/bBestBus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Best Bus Stop" />
 
     <Button
             android:id="@+id/bGPSAlarm"

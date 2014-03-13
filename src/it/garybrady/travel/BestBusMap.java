@@ -5,14 +5,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
+import com.google.android.gms.maps.model.*;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -47,12 +50,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MarkerMap extends FragmentActivity implements
+public class BestBusMap extends FragmentActivity implements
         GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener {
 
@@ -67,6 +66,9 @@ public class MarkerMap extends FragmentActivity implements
     ImageView refresh;
     Animation rotation;
     Button handle;
+    private HashMap<String,String> HM;
+    LatLng destination=null;
+
 
 
     private static final float DEFAULTZOOM = 15;
@@ -105,13 +107,9 @@ public class MarkerMap extends FragmentActivity implements
         }
         sd = (SlidingDrawer) findViewById(R.id.slidingDrawer2);
         sd.setEnabled(false);
-        plotMarkers();
-        //gotoCurrentLocation();
 
-        handle=(Button)findViewById(R.id.handle);
-        handle.setEnabled(false);
 
-        handle.setAlpha(0);
+
 
         mMap.setPadding(0,70,0,0);
         mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
@@ -119,14 +117,11 @@ public class MarkerMap extends FragmentActivity implements
             @Override
             public boolean onMarkerClick(Marker clickedMarker) {
                 clickedMarker.hideInfoWindow();
-                handle.setAlpha(1);
-                handle.setEnabled(true);
-//                sd.setEnabled(true);
+
                 busInfoList = (ListView) findViewById(R.id.listViewBusTimes);
                 realBusTimeInfo = new ArrayList<String>();
                 //getBusInfo(clickedMarker.getTitle());
                 selectedBus =clickedMarker.getTitle();
-               // new MyAsyncTask(true).execute(maybe_other_params);
                 new loadBusTimeInfo(clickedMarker.getTitle()).execute();
 
                 return false;
@@ -134,32 +129,61 @@ public class MarkerMap extends FragmentActivity implements
         });
 
 
-       refresh =(ImageView) findViewById(R.id.ivReload);
+        refresh =(ImageView) findViewById(R.id.ivReload);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(selectedBus==null){
                     Toast.makeText(getApplication(),"No bus stop selected",Toast.LENGTH_LONG).show();
                 }else{
-                realBusTimeInfo = new ArrayList<String>();
-                new loadBusTimeInfo(selectedBus).execute();
+                    realBusTimeInfo = new ArrayList<String>();
+                    new loadBusTimeInfo(selectedBus).execute();
                 }
 
             }
         });
 
-
-        ImageView widgetSave = (ImageView) findViewById(R.id.ivWidgetSet);
-        widgetSave.setOnClickListener(new View.OnClickListener() {
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
-            public void onClick(View v) {
-                if(selectedBus==null){
-                    Toast.makeText(getApplication(),"No bus stop selected",Toast.LENGTH_LONG).show();
-                }else{
-                savePreferences("busRef",selectedBus);
+            public void onMapLongClick(LatLng latLng) {
+
+                if (destination==null)
+                {
+                    MarkerOptions options = new MarkerOptions()
+                            .position(latLng)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    marker = mMap.addMarker(options);
+                    marker.setDraggable(true);
+
+                    destination=latLng;
+                    plotMarkers("arrive");
+                }   else{
+                    Toast.makeText(getApplicationContext(),"Long click current destination marker to change destination",Toast.LENGTH_LONG).show();
                 }
             }
+
         });
+
+        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+
+            }
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+                marker.remove();
+                plotMarkers("arrive");
+            }
+        });
+
+
+
 
 
     }
@@ -171,16 +195,7 @@ public class MarkerMap extends FragmentActivity implements
         return true;
     }
 
-    private void savePreferences(String key, String value) {
 
-        SharedPreferences.Editor prefs = getSharedPreferences("busInfo", MODE_PRIVATE).edit();
-        prefs.putString(key, value);
-        prefs.commit();
-
-
-        Toast.makeText(getApplicationContext(),"Saved Bus for Widget",Toast.LENGTH_LONG).show();
-
-    }
 
     public boolean servicesOK() {
         int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -302,15 +317,16 @@ public class MarkerMap extends FragmentActivity implements
 
     }
 
-    protected void gotoCurrentLocation() {
+
+    protected LatLng getCurrentLocation() {
         Location currentLocation = mLocationClient.getLastLocation();
         if (currentLocation == null) {
             Toast.makeText(this, "Current location isn't available", Toast.LENGTH_SHORT).show();
+            return null;
         }
         else {
             LatLng ll = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(ll, DEFAULTZOOM);
-            mMap.animateCamera(update);
+            return ll;
         }
     }
 
@@ -320,6 +336,8 @@ public class MarkerMap extends FragmentActivity implements
 
     @Override
     public void onConnected(Bundle arg0) {
+        plotMarkers("dept");
+
 //		Toast.makeText(this, "Connected to location service", Toast.LENGTH_SHORT).show();
     }
 
@@ -327,15 +345,28 @@ public class MarkerMap extends FragmentActivity implements
     public void onDisconnected() {
     }
 
-    public void plotMarkers(){
+    public void plotMarkers(String whichStop){
         double lat = 0,lng=0;
+        if (whichStop=="dept"){
+            LatLng ll=getCurrentLocation();
+            lat=ll.latitude;
+            lng=ll.longitude;
+        } else if (whichStop=="arrive"){
+            lat=destination.latitude;
+            lng=destination.longitude;
+        }
+
         String ref = null;
         String result = "";
         String readerURL;
         StringBuilder readerBuild = new StringBuilder();
-        readerBuild.append("http://192.3.177.209/busMap/reader.php?BusNo=");
+        readerBuild.append("http://192.3.177.209/busMap/closeBus.php?BusNo=");
 
-        readerBuild.append(receivedBus) ;
+        readerBuild.append(receivedBus);
+        readerBuild.append("&lat=");
+        readerBuild.append(lat);
+        readerBuild.append("&lng=");
+        readerBuild.append(lng);
         readerURL=readerBuild.toString();
         Toast.makeText(getApplicationContext(),readerURL,Toast.LENGTH_LONG).show();
         InputStream isr = null;
@@ -383,6 +414,7 @@ public class MarkerMap extends FragmentActivity implements
                         .title(ref)
                         .position(new LatLng(lat,lng));
                 marker = mMap.addMarker(options);
+
             }
         } catch (Exception e) {
 
@@ -467,7 +499,7 @@ public class MarkerMap extends FragmentActivity implements
             busInfoList.setAdapter(null);
 
 
-            rotation = AnimationUtils.loadAnimation(MarkerMap.this, R.anim.rotation_clockwise);
+            rotation = AnimationUtils.loadAnimation(BestBusMap.this, R.anim.rotation_clockwise);
             rotation.setRepeatCount(Animation.INFINITE);
             refresh.startAnimation(rotation);
             sd.animateOpen();
@@ -540,7 +572,7 @@ public class MarkerMap extends FragmentActivity implements
             refresh.clearAnimation();
             //loadBusTimeInfo(clickedMarker.getTitle()).execute;
             ArrayAdapter<String> arrayAdapter=
-                    new ArrayAdapter<String>(MarkerMap.this,android.R.layout.simple_list_item_1, realBusTimeInfo );
+                    new ArrayAdapter<String>(BestBusMap.this,android.R.layout.simple_list_item_1, realBusTimeInfo );
             busInfoList.setAdapter(arrayAdapter);
         }
     }

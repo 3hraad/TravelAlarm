@@ -67,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:width="65dp"
                 android:height="40dp"
+                android:clickable="false"
                 android:layout_margin="20dp"
                 android:background="@drawable/ic_navigation_drawer" />
 
