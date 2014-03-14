@@ -13,18 +13,45 @@ public class DBhelper extends SQLiteOpenHelper{
             constants.TABLE_NAME+" ("+
             constants.KEY_ID+" integer primary key autoincrement, "+
             constants.ADDRESS+" text not null); ";
+
+    private static final String CREATE_GEO_TABLE="create table "+
+            constants.GEO_TABLE+" ("+
+            constants.KEY_ID+" integer primary key autoincrement, "+
+            constants.G_TITLE+" text not null,"+
+            constants.G_LAT+" double(12) not null,"+
+            constants.G_LNG+" double(12) not null,"+
+            constants.G_ACTIVE+" integer DEFAULT 1"+
+
+
+            "); ";
+
+/*
+    public static final String KEY_ID="_id";
+    public static final String GEO_TABLE="geofence";
+    public static final String G_TITLE="title";
+    public static final String G_LAT="latitude";
+    public static final String G_LNG="longitude";
+    public static final String G_ACTIVE="active";*/
+
+
+
+
+
+
+
     public DBhelper(Context context, String name, CursorFactory factory,
                       int version) {
         super(context, name, factory, version);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.v("MyDBhelper onCreate","Creating all the tables");
+        Log.e("MyDBhelper onCreate","Creating all the tables");
         try {
             //try to create the table
             db.execSQL(CREATE_TABLE);
+            db.execSQL(CREATE_GEO_TABLE);
         } catch(SQLiteException ex) {
-            Log.v("Create table exception", ex.getMessage());
+            Log.e("Create table exception", ex.getMessage());
         }
     }
 
@@ -36,6 +63,7 @@ public class DBhelper extends SQLiteOpenHelper{
                 +" to "+newVersion
                 +", which will destroy all old data");
         db.execSQL("drop table if exists "+constants.TABLE_NAME);
+        db.execSQL("drop table if exists "+constants.GEO_TABLE);
         onCreate(db);
     }
 }

@@ -33,6 +33,12 @@
             android:text="GPS Alarm" />
 
     <Button
+            android:id="@+id/bViewGeofence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Current Geofences" />
+
+    <Button
             android:id="@+id/bGCMtest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

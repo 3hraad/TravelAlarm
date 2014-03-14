@@ -66,6 +66,15 @@ public class MyActivity extends Activity {
             }
         });
 
+        Button viewGeo=(Button)findViewById(R.id.bViewGeofence);
+        viewGeo.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MyActivity.this,ViewGeofences.class);
+                startActivity(i);
+            }
+        });
+
         Button gcm = (Button) findViewById(R.id.bGCMtest);
         gcm.setOnClickListener(new OnClickListener() {
             @Override

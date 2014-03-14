@@ -77,4 +77,45 @@ public class myDatabase {
 
 
     }
-}
+
+
+    /*
+    * Geofence table methods
+    * */
+
+
+    public int getMaxGeoId(){
+        //limit of 1, ordered by id
+        Cursor c = db.rawQuery("SELECT MAX('" + constants.KEY_ID+"') AS 'max' FROM "+ constants.GEO_TABLE+";",null);
+
+
+        int result=0;
+
+        int iRow = c.getColumnIndex(constants.KEY_ID);
+        int ioption = c.getColumnIndex("max");
+        int i =0;
+        //iterate through each result and add it to the result string
+        for(c.moveToFirst(); !c.isAfterLast();c.moveToNext()){
+            result=c.getInt(ioption);
+
+            i++;
+        }
+        return result;
+    }
+
+    public long insertGeofence(String title,double lat,double lng)
+    {
+        try{
+            ContentValues newTaskValue = new ContentValues();
+            newTaskValue.put(constants.G_TITLE, title);
+            newTaskValue.put(constants.G_LAT, lat);
+            newTaskValue.put(constants.G_LNG, lng);
+            newTaskValue.put(constants.G_ACTIVE, 1);
+            return db.insert(constants.TABLE_NAME, null, newTaskValue);
+        } catch(SQLiteException ex) {
+            Log.v("Insert into database exception caught",
+                    ex.getMessage());
+            return -1;
+        }
+    }
+ }
