@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -76,7 +77,7 @@ public class BestBusMap extends FragmentActivity implements
     private static final String LOGTAG = "Maps";
 
     LocationClient mLocationClient;
-    Marker marker;
+    Marker mArrive, mDestination,mDeptarture;
     SlidingDrawer sd;
     ArrayList<String> realBusTimeInfo;
     ListView busInfoList;
@@ -116,14 +117,19 @@ public class BestBusMap extends FragmentActivity implements
 
             @Override
             public boolean onMarkerClick(Marker clickedMarker) {
-                clickedMarker.hideInfoWindow();
 
+                if(clickedMarker.getTitle().equals("Closest Stop to Destination")){
+
+                }else if(clickedMarker.getTitle().equals("Destination")){
+                    Toast.makeText(getApplicationContext(),"Long click to drag pin or to create a new Destination",Toast.LENGTH_LONG).show();
+
+                } else{
                 busInfoList = (ListView) findViewById(R.id.listViewBusTimes);
                 realBusTimeInfo = new ArrayList<String>();
                 //getBusInfo(clickedMarker.getTitle());
                 selectedBus =clickedMarker.getTitle();
                 new loadBusTimeInfo(clickedMarker.getTitle()).execute();
-
+                }
                 return false;
             }
         });
@@ -139,35 +145,39 @@ public class BestBusMap extends FragmentActivity implements
                     realBusTimeInfo = new ArrayList<String>();
                     new loadBusTimeInfo(selectedBus).execute();
                 }
+                sd.open();
 
             }
         });
+
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
 
-                if (destination==null)
+                if (destination!=null)
                 {
-                    MarkerOptions options = new MarkerOptions()
-                            .position(latLng)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                    marker = mMap.addMarker(options);
-                    marker.setDraggable(true);
-
-                    destination=latLng;
-                    plotMarkers("arrive");
-                }   else{
-                    Toast.makeText(getApplicationContext(),"Long click current destination marker to change destination",Toast.LENGTH_LONG).show();
+                    mDestination.remove();
+                    mArrive.remove();
                 }
+                MarkerOptions options = new MarkerOptions()
+                        .position(latLng)
+                        .title("Destination")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                mDestination = mMap.addMarker(options);
+                mDestination.setDraggable(true);
+
+                destination=latLng;
+                plotMarkers("arrive");
             }
+
 
         });
 
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
             @Override
             public void onMarkerDragStart(Marker marker) {
-
+                mArrive.remove();
             }
 
             @Override
@@ -177,12 +187,26 @@ public class BestBusMap extends FragmentActivity implements
 
             @Override
             public void onMarkerDragEnd(Marker marker) {
-                marker.remove();
+                destination=mDestination.getPosition();
                 plotMarkers("arrive");
             }
         });
 
-
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+               if (marker.getTitle().equals("Closest Stop to Destination")){
+                   Bundle b = new Bundle();
+                   b.putDouble("lat", marker.getPosition().latitude);
+                   b.putDouble("lng", marker.getPosition().longitude);
+                   b.putDouble("radius", 75);
+                   Intent i = new Intent(BestBusMap.this,GeofenceConstruct.class);
+                   i.putExtras(b);
+                   startActivity(i);
+                   finish();
+               }
+            }
+        });
 
 
 
@@ -408,12 +432,23 @@ public class BestBusMap extends FragmentActivity implements
                 lat= new Double(json.getString("lat"));
                 lng= new Double(json.getString("long"));
 
-
-
                 MarkerOptions options = new MarkerOptions()
                         .title(ref)
                         .position(new LatLng(lat,lng));
-                marker = mMap.addMarker(options);
+
+                if (whichStop=="dept"){
+
+                    mDeptarture = mMap.addMarker(options);
+                    mDeptarture.setDraggable(false);
+                } else if (whichStop=="arrive"){
+                    mArrive = mMap.addMarker(options);
+                    mArrive.setDraggable(true);
+                    mArrive.setTitle("Closest Stop to Destination");
+                    mArrive.setSnippet("Click here to set alarm");
+
+                }
+
+
 
             }
         } catch (Exception e) {
