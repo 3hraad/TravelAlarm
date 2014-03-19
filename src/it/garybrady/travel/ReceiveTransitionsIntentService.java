@@ -1,6 +1,7 @@
 package it.garybrady.travel;
 
 import android.app.Notification;
+import android.os.Bundle;
 import android.widget.Toast;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.LocationClient;
@@ -111,6 +112,9 @@ public class ReceiveTransitionsIntentService extends IntentService {
 
    private void sendNotification(String transitionType, String ids) {
     Intent i = new Intent(this, TriggeredGeofence.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+       Bundle b = new Bundle();
+       b.putString("id",ids);
+       i.putExtras(b);
        startActivity(i);
 }
 

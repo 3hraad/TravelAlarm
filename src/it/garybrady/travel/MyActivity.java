@@ -31,6 +31,7 @@ public class MyActivity extends Activity {
     SlidingDrawer sd;
     WebView wb;
     TextView test;
+    myDatabase dba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,15 +117,24 @@ public class MyActivity extends Activity {
     }
 
     private void addAddressToDB(String message) {
-        myDatabase dba=new myDatabase(this);
+        dba=new myDatabase(this);
         dba.open();
         dba.insertAddress(message);
         dba.close();
     }
 
+    /*@Override
+    protected void onPause() {
+        super.onPause();
+        dba.close();
+    }
 
-
-        //sd = (SlidingDrawer) findViewById(R.id.slidingDrawer1);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dba.close();
+    }*/
+    //sd = (SlidingDrawer) findViewById(R.id.slidingDrawer1);
 		/*wb = (WebView) findViewById(R.id.webView1);
 		wb.loadUrl("http://www.rtpi.ie/Popup_Content/WebDisplay/WebDisplay.aspx?stopRef=241831");
 

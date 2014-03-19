@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /*
 *This class is used to interact with the database
  */
@@ -13,6 +17,7 @@ public class myDatabase {
     private SQLiteDatabase db;
     private final Context context;
     private final DBhelper dbhelper;
+    public static final String[] KEY_TITLE = new String[] {constants.KEY_ID,constants.G_TITLE};
     public myDatabase(Context c){
         context = c;
         dbhelper = new DBhelper(context, constants.DATABASE_NAME, null,
@@ -86,10 +91,10 @@ public class myDatabase {
 
     public int getMaxGeoId(){
         //limit of 1, ordered by id
-        Cursor c = db.rawQuery("SELECT MAX('" + constants.KEY_ID+"') AS 'max' FROM "+ constants.GEO_TABLE+";",null);
+        Cursor c = db.rawQuery("SELECT MAX(" + constants.KEY_ID+") AS max FROM "+ constants.GEO_TABLE+";",null);
 
 
-        int result=0;
+        int result=33;
 
         int iRow = c.getColumnIndex(constants.KEY_ID);
         int ioption = c.getColumnIndex("max");
@@ -100,6 +105,7 @@ public class myDatabase {
 
             i++;
         }
+        c.close();
         return result;
     }
 
@@ -111,11 +117,56 @@ public class myDatabase {
             newTaskValue.put(constants.G_LAT, lat);
             newTaskValue.put(constants.G_LNG, lng);
             newTaskValue.put(constants.G_ACTIVE, 1);
-            return db.insert(constants.TABLE_NAME, null, newTaskValue);
+            return db.insert(constants.GEO_TABLE, null, newTaskValue);
         } catch(SQLiteException ex) {
             Log.v("Insert into database exception caught",
                     ex.getMessage());
             return -1;
         }
+    }
+
+    /**
+     * Getting all titles
+     * */
+    public List<String> getAllGeo(){
+        List<String> titles = new ArrayList<String>();
+
+        // Select All Query
+        Cursor c = db.rawQuery("SELECT " + constants.KEY_ID+", "+ constants.G_TITLE +" FROM "+ constants.GEO_TABLE+";",null);
+
+
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                titles.add(c.getString(1));
+            } while (c.moveToNext());
+        }
+
+        // closing connection
+        c.close();
+
+        // returning lables
+        return titles;
+    }
+    // Get a specific row (by rowId)
+    public Cursor getRow(long rowId) {
+        String where = constants.KEY_ID + "=" + rowId;
+        Cursor c = 	db.query(true, constants.GEO_TABLE, KEY_TITLE,
+                where, null, null, null, null, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+        return c;
+    }
+
+    /**
+     * Return a Cursor over the list of all notes in the database
+     *
+     * @return Cursor over all notes
+     */
+    public Cursor fetchAllNotes() {
+
+        return db.query(constants.GEO_TABLE, new String[] {constants.KEY_ID, constants.G_TITLE}, null, null, null, null, null);
     }
  }

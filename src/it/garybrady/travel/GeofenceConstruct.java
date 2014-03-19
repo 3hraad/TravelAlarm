@@ -43,6 +43,7 @@ import it.garybrady.travel.GeofenceUtils.REQUEST_TYPE;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.Geofence;
+import it.garybrady.traveldata.myDatabase;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -95,6 +96,10 @@ public class GeofenceConstruct extends FragmentActivity {
     // Handle to geofence 1 radius in the UI
     private EditText mRadius1;
     private float prad;
+
+    //geofence database
+    myDatabase dba;
+    EditText title;
 
 
     /*
@@ -190,6 +195,8 @@ public class GeofenceConstruct extends FragmentActivity {
         mLongitude1.setText(temp);
         temp = rRad.toString();
         mRadius1.setText(temp);
+        title=(EditText)findViewById(R.id.etTitle);
+
 
     }
 
@@ -261,6 +268,18 @@ public class GeofenceConstruct extends FragmentActivity {
         }
     }
 
+    /*
+    * Get biggest id from geofence table to id of new geofence
+    * */
+
+    private int getMaxId() {
+        int temp;
+        dba=new myDatabase(this);
+        dba.open();
+        temp=dba.getMaxGeoId();
+        dba.close();
+        return temp;
+    }
     /*
      * Whenever the Activity resumes, reconnect the client to Location
      * Services and reload the last geofences that were set
@@ -348,7 +367,8 @@ public class GeofenceConstruct extends FragmentActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mPrefs.setGeofence("1", mUIGeofence1);
+       // mPrefs.setGeofence("1", mUIGeofence1);
+        //dba.close();
     }
 
     /**
@@ -570,12 +590,15 @@ public class GeofenceConstruct extends FragmentActivity {
             return;
         }
 
+        int maxId=getMaxId();
+        maxId++;
+
         /*
          * Create a version of geofence 1 that is "flattened" into individual fields. This
          * allows it to be stored in SharedPreferences.
          */
         mUIGeofence1 = new SimpleGeofence(
-                "1",
+                String.valueOf(maxId),
                 // Get latitude, longitude, and radius from the UI
                 Double.valueOf(mLatitude1.getText().toString()),
                 Double.valueOf(mLongitude1.getText().toString()),
@@ -586,7 +609,7 @@ public class GeofenceConstruct extends FragmentActivity {
                 Geofence.GEOFENCE_TRANSITION_ENTER);
 
         // Store this flat version in SharedPreferences
-        mPrefs.setGeofence("1", mUIGeofence1);
+        mPrefs.setGeofence(String.valueOf(maxId), mUIGeofence1);
 
         /*
          * Create a version of geofence 2 that is "flattened" into individual fields. This
@@ -604,11 +627,22 @@ public class GeofenceConstruct extends FragmentActivity {
         try {
             // Try to add geofences
             mGeofenceRequester.addGeofences(mCurrentGeofences);
+            //Hey Ho add to DB
+            dba=new myDatabase(this);
+            dba.open();
+            dba.insertGeofence(title.getText().toString(),Double.valueOf(mLatitude1.getText().toString()),
+                    Double.valueOf(mLongitude1.getText().toString()));
+            dba.close();
+
+
+
+
         } catch (UnsupportedOperationException e) {
             // Notify user that previous request hasn't finished.
             Toast.makeText(this, R.string.add_geofences_already_requested_error,
                     Toast.LENGTH_LONG).show();
         }
+
     }
     /**
      * Check all the input values and flag those that are incorrect

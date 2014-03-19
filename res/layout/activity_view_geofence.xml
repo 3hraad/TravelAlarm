@@ -15,4 +15,8 @@
             android:layout_height="wrap_content"
             android:text="Get Max ID"
             android:id="@+id/bGetMaxId"/>
+    <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvGeofence"/>
 </LinearLayout>
