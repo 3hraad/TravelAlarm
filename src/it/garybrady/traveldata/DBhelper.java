@@ -18,8 +18,8 @@ public class DBhelper extends SQLiteOpenHelper{
             constants.GEO_TABLE+" ("+
             constants.KEY_ID+" integer primary key autoincrement, "+
             constants.G_TITLE+" text not null,"+
-            constants.G_LAT+" double(12) not null,"+
-            constants.G_LNG+" double(12) not null,"+
+            constants.G_LAT+" double(20,15) not null,"+
+            constants.G_LNG+" double(20,15) not null,"+
             constants.G_ACTIVE+" integer DEFAULT 1"+
 
 

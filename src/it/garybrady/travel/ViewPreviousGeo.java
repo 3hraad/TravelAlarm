@@ -1,6 +1,7 @@
 package it.garybrady.travel;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Created by Gary on 14/03/14.
  */
-public class ViewGeofences extends Activity {
+public class ViewPreviousGeo extends Activity {
     myDatabase dba;
     int maxId;
     TextView max;
@@ -90,7 +91,7 @@ public class ViewGeofences extends Activity {
         dba=new myDatabase(this);
         dba.open();
         // Get all of the notes from the database and create the item list
-        Cursor c = dba.fetchAllActive();
+        Cursor c = dba.previousGeo();
         startManagingCursor(c);
 
         String[] from = new String[] { constants.G_TITLE };
@@ -107,14 +108,25 @@ public class ViewGeofences extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long idInDB) {
                 dba.open();
-                Cursor cursor=dba.getRow(idInDB);
+                Cursor cursor=dba.getRowLocation(idInDB);
                 dba.close();
                 if(cursor.moveToFirst()){
                     int idDB=cursor.getInt(0);
                     String title=cursor.getString(1);
-                    int active=cursor.getInt(2);
-                    String message="id: "+idDB+"  title: "+title+"  active: "+active;
-                    Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                    double lat=cursor.getDouble(2);
+                    double lng=cursor.getDouble(3);
+
+                    Bundle b =new Bundle();
+                    b.putInt("id",idDB);
+                    b.putString("title", title);
+                    b.putDouble("lat", lat);
+                    b.putDouble("lng", lng);
+                    Intent i = new Intent(ViewPreviousGeo.this,MapLongGeofence.class);
+                    i.putExtras(b);
+                    cursor.close();
+                    startActivity(i);
+                    finish();
+
                 }
             }
         });

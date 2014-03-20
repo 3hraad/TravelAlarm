@@ -17,7 +17,10 @@ public class myDatabase {
     private SQLiteDatabase db;
     private final Context context;
     private final DBhelper dbhelper;
+    public static final String[] KEY_TITLE_ACTIVE = new String[] {constants.KEY_ID,constants.G_TITLE,constants.G_ACTIVE};
     public static final String[] KEY_TITLE = new String[] {constants.KEY_ID,constants.G_TITLE};
+    public static final String[] KEY_TITLE_LATLNG = new String[] {constants.KEY_ID,constants.G_TITLE,constants.G_LAT,constants.G_LNG};
+
     public myDatabase(Context c){
         context = c;
         dbhelper = new DBhelper(context, constants.DATABASE_NAME, null,
@@ -152,11 +155,28 @@ public class myDatabase {
     // Get a specific row (by rowId)
     public Cursor getRow(long rowId) {
         String where = constants.KEY_ID + "=" + rowId;
-        Cursor c = 	db.query(true, constants.GEO_TABLE, KEY_TITLE,
+        Cursor c = 	db.query(true, constants.GEO_TABLE, KEY_TITLE_ACTIVE,
                 where, null, null, null, null, null);
+
+
         if (c != null) {
             c.moveToFirst();
         }
+
+        return c;
+    }
+
+    // Get a specific row (by rowId)
+    public Cursor getRowLocation(long rowId) {
+        String where = constants.KEY_ID + "=" + rowId;
+        Cursor c = 	db.query(true, constants.GEO_TABLE, KEY_TITLE_LATLNG,
+                where, null, null, null, null, null);
+
+
+        if (c != null) {
+            c.moveToFirst();
+        }
+
         return c;
     }
 
@@ -165,8 +185,38 @@ public class myDatabase {
      *
      * @return Cursor over all notes
      */
-    public Cursor fetchAllNotes() {
+    public Cursor fetchAllActive() {
+        String where = constants.G_ACTIVE + "=" + 1;
+        Cursor c = db.query(true, constants.GEO_TABLE, KEY_TITLE,
+                where, null, null, null, null, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
 
-        return db.query(constants.GEO_TABLE, new String[] {constants.KEY_ID, constants.G_TITLE}, null, null, null, null, null);
+        return c;
+    }
+
+    public Cursor previousGeo() {
+        String where = constants.G_ACTIVE + "=" + 0;
+        Cursor c = db.query(true, constants.GEO_TABLE, KEY_TITLE,
+                where, null, null, null, null, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
+
+    public void deactivateGeo(int id){
+        try{
+            ContentValues cv = new ContentValues();
+            cv.put(constants.G_ACTIVE, 0);
+            db.update(constants.GEO_TABLE,cv,constants.KEY_ID+"="+id,null);
+
+        } catch(SQLiteException ex) {
+            Log.v("Insert into database exception caught",
+                    ex.getMessage());
+
+        }
     }
  }

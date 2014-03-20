@@ -1,35 +1,19 @@
 package it.garybrady.travel;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import android.widget.*;
-import it.garybrady.traveldata.myDatabase;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import it.garybrady.travel.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import it.garybrady.traveldata.myDatabase;
 
 public class MyActivity extends Activity {
-    Button testDrawer;
-    SlidingDrawer sd;
-    WebView wb;
+
     TextView test;
     myDatabase dba;
 
@@ -38,8 +22,20 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         StrictMode.enableDefaults();
+        setUpButtons();
         test = (TextView) findViewById(R.id.testView);
+    }
+
+    private void addAddressToDB(String message) {
+        dba=new myDatabase(this);
+        dba.open();
+        dba.insertAddress(message);
+        dba.close();
+    }
+
+    public void setUpButtons(){
         Button myMapActivity = (Button) findViewById(R.id.bBusAlarm);
+
         myMapActivity.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -72,6 +68,15 @@ public class MyActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MyActivity.this,ViewGeofences.class);
+                startActivity(i);
+            }
+        });
+
+        Button prevGeo=(Button)findViewById(R.id.bViewprevGeo);
+        prevGeo.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MyActivity.this,ViewPreviousGeo.class);
                 startActivity(i);
             }
         });
@@ -114,15 +119,8 @@ public class MyActivity extends Activity {
                 startActivity(gps);
             }
         });
-    }
 
-    private void addAddressToDB(String message) {
-        dba=new myDatabase(this);
-        dba.open();
-        dba.insertAddress(message);
-        dba.close();
     }
-
     /*@Override
     protected void onPause() {
         super.onPause();
@@ -149,7 +147,7 @@ public class MyActivity extends Activity {
 		});*/
 
 
-    }
+}
 
 
 

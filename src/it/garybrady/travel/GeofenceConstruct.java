@@ -182,9 +182,17 @@ public class GeofenceConstruct extends FragmentActivity {
         // Get handles to the Geofence editor fields in the UI
         mLatitude1 = (EditText) findViewById(R.id.value_latitude_1);
         mLongitude1 = (EditText) findViewById(R.id.value_longitude_1);
+        mLongitude1.setEnabled(false);
+        mLatitude1.setEnabled(false);
+
+
         mRadius1 = (EditText) findViewById(R.id.value_radius_1);
+        title=(EditText)findViewById(R.id.etTitle);
 
         Bundle b = getIntent().getExtras();
+        if(b.getString("title",null)!=null){
+            title.setText(b.getString("title"));
+        }
         Double rLat =b.getDouble("lat",0);
         Double rLng =b.getDouble("lng",0);
         Double rRad =b.getDouble("radius",0);
@@ -195,7 +203,7 @@ public class GeofenceConstruct extends FragmentActivity {
         mLongitude1.setText(temp);
         temp = rRad.toString();
         mRadius1.setText(temp);
-        title=(EditText)findViewById(R.id.etTitle);
+
 
 
     }
@@ -228,6 +236,10 @@ public class GeofenceConstruct extends FragmentActivity {
 
                             // Restart the process of adding the current geofences
                             mGeofenceRequester.addGeofences(mCurrentGeofences);
+
+                            Toast.makeText(getApplicationContext(),"Geofence Created",Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(GeofenceConstruct.this, MyActivity.class));
+                            finish();
 
                             // If the request was to remove geofences
                         } else if (GeofenceUtils.REQUEST_TYPE.REMOVE == mRequestType ){
@@ -635,7 +647,9 @@ public class GeofenceConstruct extends FragmentActivity {
             dba.close();
 
 
-
+            Toast.makeText(getApplicationContext(),"Geofence Created",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(GeofenceConstruct.this, MyActivity.class));
+            finish();
 
         } catch (UnsupportedOperationException e) {
             // Notify user that previous request hasn't finished.
@@ -657,36 +671,47 @@ public class GeofenceConstruct extends FragmentActivity {
          * field in red and put a Toast message in the UI. Otherwise set the input field highlight
          * to black, ensuring that a field that was formerly wrong is reset.
          */
+
+
+        if (TextUtils.isEmpty(title.getText())) {
+            title.setTextColor(Color.RED);
+            Toast.makeText(this, R.string.geofence_input_error_missing, Toast.LENGTH_LONG).show();
+
+            // Set the validity to "invalid" (false)
+            inputOK = false;
+        }
         if (TextUtils.isEmpty(mLatitude1.getText())) {
-            mLatitude1.setBackgroundColor(Color.RED);
+            mLatitude1.setTextColor(Color.RED);
             Toast.makeText(this, R.string.geofence_input_error_missing, Toast.LENGTH_LONG).show();
 
             // Set the validity to "invalid" (false)
             inputOK = false;
         } else {
 
-            mLatitude1.setBackgroundColor(Color.BLACK);
+            //mLatitude1.setBackgroundColor(Color.BLACK);
         }
+
+
 
         if (TextUtils.isEmpty(mLongitude1.getText())) {
-            mLongitude1.setBackgroundColor(Color.RED);
+            mLongitude1.setTextColor(Color.RED);
             Toast.makeText(this, R.string.geofence_input_error_missing, Toast.LENGTH_LONG).show();
 
             // Set the validity to "invalid" (false)
             inputOK = false;
         } else {
 
-            mLongitude1.setBackgroundColor(Color.BLACK);
+            //mLongitude1.setBackgroundColor(Color.BLACK);
         }
         if (TextUtils.isEmpty(mRadius1.getText())) {
-            mRadius1.setBackgroundColor(Color.RED);
+            mRadius1.setTextColor(Color.RED);
             Toast.makeText(this, R.string.geofence_input_error_missing, Toast.LENGTH_LONG).show();
 
             // Set the validity to "invalid" (false)
             inputOK = false;
         } else {
 
-            mRadius1.setBackgroundColor(Color.BLACK);
+            //mRadius1.setBackgroundColor(Color.BLACK);
         }
 
 
@@ -712,7 +737,7 @@ public class GeofenceConstruct extends FragmentActivity {
              */
 
             if (lat1 > GeofenceUtils.MAX_LATITUDE || lat1 < GeofenceUtils.MIN_LATITUDE) {
-                mLatitude1.setBackgroundColor(Color.RED);
+                mLatitude1.setTextColor(Color.RED);
                 Toast.makeText(
                         this,
                         R.string.geofence_input_error_latitude_invalid,
@@ -722,11 +747,11 @@ public class GeofenceConstruct extends FragmentActivity {
                 inputOK = false;
             } else {
 
-                mLatitude1.setBackgroundColor(Color.BLACK);
+                //mLatitude1.setBackgroundColor(Color.BLACK);
             }
 
             if ((lng1 > GeofenceUtils.MAX_LONGITUDE) || (lng1 < GeofenceUtils.MIN_LONGITUDE)) {
-                mLongitude1.setBackgroundColor(Color.RED);
+                mLongitude1.setTextColor(Color.RED);
                 Toast.makeText(
                         this,
                         R.string.geofence_input_error_longitude_invalid,
@@ -736,14 +761,14 @@ public class GeofenceConstruct extends FragmentActivity {
                 inputOK = false;
             } else {
 
-                mLongitude1.setBackgroundColor(Color.BLACK);
+                //mLongitude1.setBackgroundColor(Color.BLACK);
             }
 
 
 
 
             if (rd1 < GeofenceUtils.MIN_RADIUS) {
-                mRadius1.setBackgroundColor(Color.RED);
+                mRadius1.setTextColor(Color.RED);
                 Toast.makeText(
                         this,
                         R.string.geofence_input_error_radius_invalid,
@@ -753,7 +778,7 @@ public class GeofenceConstruct extends FragmentActivity {
                 inputOK = false;
             } else {
 
-                mRadius1.setBackgroundColor(Color.BLACK);
+                //mRadius1.setBackgroundColor(Color.BLACK);
             }
 
         }

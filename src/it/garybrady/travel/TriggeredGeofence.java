@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import it.garybrady.traveldata.myDatabase;
 
 /**
  * Created by Gary on 06/03/14.
@@ -15,6 +16,7 @@ public class TriggeredGeofence extends Activity {
     int geoIDs[];
     String array[];
     String received;
+    myDatabase dba;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,16 @@ public class TriggeredGeofence extends Activity {
         whichGeo.setText(bun.getString("id")+"------");
         for(int i=0;i<separated.length;i++){
             whichGeo.append(separated[i]);
+            removeGeo(Integer.parseInt(separated[i]));
         }
 
+
+
+    }
+    private void removeGeo(int x) {
+        dba=new myDatabase(this);
+        dba.open();
+        dba.deactivateGeo(x);
+        dba.close();
     }
 }

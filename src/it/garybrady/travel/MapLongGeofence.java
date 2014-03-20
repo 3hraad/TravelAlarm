@@ -62,6 +62,11 @@ public class MapLongGeofence extends FragmentActivity implements
     Switch  radiusSwitch;
     Button go,setAlarm;
     EditText searchedLocation;
+    String rec_title=null;
+    double rec_lat,rec_lng;
+    int rec_id;
+    Bundle b;
+
 
 
     private static final float DEFAULTZOOM = 15;
@@ -203,16 +208,52 @@ public class MapLongGeofence extends FragmentActivity implements
         setAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle b = new Bundle();
-                b.putDouble("lat", marker.getPosition().latitude);
-                b.putDouble("lng", marker.getPosition().longitude);
-                b.putDouble("radius", circle.getRadius());
+                Bundle pass = new Bundle();
+                if(b.getString("title",null)!=null){
+                    pass.putString("title",b.getString("title"));
+                }
+                pass.putDouble("lat", marker.getPosition().latitude);
+                pass.putDouble("lng", marker.getPosition().longitude);
+                pass.putDouble("radius", circle.getRadius());
                 Intent i = new Intent(MapLongGeofence.this,GeofenceConstruct.class);
-                i.putExtras(b);
+                i.putExtras(pass);
                 startActivity(i);
                 finish();
             }
         });
+
+        b = getIntent().getExtras();
+        if (b!=null){
+            previousAlarmReceived();
+        }
+    }
+
+    private void previousAlarmReceived() {
+        rec_id=b.getInt("id");
+        rec_title=b.getString("title");
+        rec_lat=b.getDouble("lat");
+        rec_lng=b.getDouble("lng");
+        LatLng latLng= new LatLng(rec_lat, rec_lng);
+        mMap.clear();
+        radiusSwitch.setVisibility(View.VISIBLE);
+        radiusSeekbar.setVisibility(View.VISIBLE);
+        MarkerOptions options = new MarkerOptions()
+                .title(rec_title)
+                .position(latLng);
+        marker = mMap.addMarker(options);
+        marker.setDraggable(true);
+        circle=mMap.addCircle(new CircleOptions()
+                .center(latLng)
+                .radius(50)
+                .strokeColor(Color.WHITE)
+                .strokeWidth(3)
+                .fillColor(0x6F323299)
+
+        );
+        go.setVisibility(View.INVISIBLE);
+        setAlarm.setVisibility(View.VISIBLE);
+        searchedLocation.setVisibility(View.INVISIBLE);
+
     }
 
     private void displayRadius() {

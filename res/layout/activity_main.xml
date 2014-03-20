@@ -39,6 +39,12 @@
             android:text="View Current Geofences" />
 
     <Button
+            android:id="@+id/bViewprevGeo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Previous Geofences" />
+
+    <Button
             android:id="@+id/bGCMtest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
