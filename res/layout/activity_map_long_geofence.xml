@@ -24,7 +24,7 @@
                 android:text="Set Alarm"
 
                 android:id="@+id/bSetLongGeofence"
-                android:alpha="0.8"/>
+                android:alpha="0.95"/>
 
 
     </LinearLayout>
@@ -61,8 +61,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_vertical"
                 android:hint="Search Location"
+                android:layout_marginTop="10dp"
+
                 android:ems="10"
-                android:alpha="0.8" android:layout_alignTop="@+id/etLongGeoLocate"
+                android:layout_alignTop="@+id/etLongGeoLocate"
                 android:layout_alignParentRight="true">
 
             <requestFocus />
@@ -70,14 +72,16 @@
 
         <Button
                 android:id="@+id/bLongGeoLocate"
-                android:layout_width="50dp"
+                android:layout_width="49dp"
                 android:layout_height="37dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="6dp"
                 android:onClick="geoLocate"
                 android:text="Go"
-                android:alpha="0.6" android:layout_marginBottom="3dp"/>
+                android:alpha="0.9"
+                android:layout_marginBottom="3dp"
+                android:layout_marginRight="12dp"/>
     </RelativeLayout>
 
 

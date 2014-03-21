@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		StrictMode.enableDefaults();
-		test = (TextView) findViewById(R.id.testView);
+		//test = (TextView) findViewById(R.id.testView);
 		Button myMapActivity = (Button) findViewById(R.id.bBusAlarm);
 		myMapActivity.setOnClickListener(new OnClickListener() {
 

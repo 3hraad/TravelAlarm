@@ -88,6 +88,7 @@ public class BestBusMap extends FragmentActivity implements
         Bundle b = getIntent().getExtras();
         receivedBus=b.getString("SelectedBus");
 
+        Toast.makeText(this, "Long press on map to set destination", Toast.LENGTH_SHORT).show();
 
 
 
@@ -197,6 +198,7 @@ public class BestBusMap extends FragmentActivity implements
             public void onInfoWindowClick(Marker marker) {
                if (marker.getTitle().equals("Closest Stop to Destination")){
                    Bundle b = new Bundle();
+                   b.putString("title", "Bus "+receivedBus);
                    b.putDouble("lat", marker.getPosition().latitude);
                    b.putDouble("lng", marker.getPosition().longitude);
                    b.putDouble("radius", 75);
@@ -392,7 +394,7 @@ public class BestBusMap extends FragmentActivity implements
         readerBuild.append("&lng=");
         readerBuild.append(lng);
         readerURL=readerBuild.toString();
-        Toast.makeText(getApplicationContext(),readerURL,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),readerURL,Toast.LENGTH_LONG).show();
         InputStream isr = null;
         try{
             HttpClient httpclient = new DefaultHttpClient();
@@ -537,7 +539,11 @@ public class BestBusMap extends FragmentActivity implements
             rotation = AnimationUtils.loadAnimation(BestBusMap.this, R.anim.rotation_clockwise);
             rotation.setRepeatCount(Animation.INFINITE);
             refresh.startAnimation(rotation);
-            sd.animateOpen();
+            if(sd.isOpened()){
+
+            }else{
+                sd.animateOpen();
+            }
         }
 
         @Override

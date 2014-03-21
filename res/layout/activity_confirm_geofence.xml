@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/geofence1"
+                    android:text="Geofence Details"
                     android:textStyle="bold"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"/>
@@ -120,9 +120,10 @@
                     android:layout_marginTop="60dp"
                     android:text="@string/register_geofence"
                     android:layout_alignTop="@+id/label_radius_1"
-                    android:onClick="onRegisterClicked" />
+                    android:onClick="onRegisterClicked" android:layout_alignParentRight="true"
+                    android:layout_alignParentLeft="true"/>
 
-            <Button
+           <!-- <Button
                     android:id="@+id/unregister_geofence1"
                     android:layout_below="@id/register"
                     android:layout_width="150dp"
@@ -130,7 +131,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_alignBaseline="@+id/unregister_geofence2"
                     android:text="@string/unregister_geofence1"
-                    android:onClick="onUnregisterGeofence1Clicked" />
+                    android:onClick="onUnregisterGeofence1Clicked" />-->
 
 
         </RelativeLayout>

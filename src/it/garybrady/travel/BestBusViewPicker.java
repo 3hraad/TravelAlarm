@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class BestBusViewPicker extends Activity {
 
     NumberPicker pickBus;
-    String busOptions[]={"All","205","208"};
+    String busOptions[]={"205"};
     Button viewBus;
     TextView selectBus;
     String temp=null;
@@ -24,7 +24,8 @@ public class BestBusViewPicker extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bus_view_picker);
         pickBus = (NumberPicker) findViewById(R.id.npBusViewPicker);
-        pickBus.setMaxValue(3);
+
+        pickBus.setMaxValue(1);
         pickBus.setMinValue(1);
         pickBus.setDisplayedValues(busOptions);
         viewBus = (Button) findViewById(R.id.bBusViewPicker);

@@ -209,7 +209,7 @@ public class MapLongGeofence extends FragmentActivity implements
             @Override
             public void onClick(View v) {
                 Bundle pass = new Bundle();
-                if(b.getString("title",null)!=null){
+                if(b!=null){
                     pass.putString("title",b.getString("title"));
                 }
                 pass.putDouble("lat", marker.getPosition().latitude);

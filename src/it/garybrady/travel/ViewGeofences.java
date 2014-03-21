@@ -18,7 +18,7 @@ import java.util.List;
 public class ViewGeofences extends Activity {
     myDatabase dba;
     int maxId;
-    TextView max;
+    TextView geo;
     ListView previousGeo;
     float historicX = Float.NaN, historicY = Float.NaN;
     static final int DELTA = 50;
@@ -28,15 +28,7 @@ public class ViewGeofences extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_geofence);
-        max=(TextView)findViewById(R.id.tvMaxId);
-        Button getMax=(Button)findViewById(R.id.bGetMaxId);
-        getMax.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                maxId=getMaxId();
-                max.setText(String.valueOf(maxId));
-            }
-        });
+
         previousGeo=(ListView)findViewById(R.id.lvGeofence);
         fillData();
         registerListClickCallback();
@@ -55,12 +47,12 @@ public class ViewGeofences extends Activity {
                         if (event.getX() - historicX < -DELTA)
                         {
 
-                            Toast.makeText(getApplicationContext(),"slide recieved captain",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"slide",Toast.LENGTH_LONG).show();
                             return true;
                         }
                         else if (event.getX() - historicX > DELTA)
                         {
-                            Toast.makeText(getApplicationContext(),"slide recieved captain",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"slide",Toast.LENGTH_LONG).show();
                             return true;
                         } break;
                     default: return false;
@@ -71,26 +63,14 @@ public class ViewGeofences extends Activity {
         //loadListView();
     }
 
-    private void loadListView() {
-        dba=new myDatabase(this);
-        dba.open();
 
-        List<String> titles = dba.getAllGeo();
-        dba.close();
-
-        // Creating adapter
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, titles);
-        // Drop down layout style - list view with radio button
-        //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // attaching data adapter to spinner
-        previousGeo.setAdapter(dataAdapter);
-    }
 
     private void fillData() {
         dba=new myDatabase(this);
         dba.open();
         // Get all of the notes from the database and create the item list
         Cursor c = dba.fetchAllActive();
+        dba.close();
         startManagingCursor(c);
 
         String[] from = new String[] { constants.G_TITLE };
@@ -119,14 +99,7 @@ public class ViewGeofences extends Activity {
             }
         });
     }
-    private int getMaxId() {
-        int temp;
-        dba=new myDatabase(this);
-        dba.open();
-        temp=dba.getMaxGeoId();
-        dba.close();
-        return temp;
-    }
+
 
 
 }

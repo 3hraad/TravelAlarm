@@ -141,6 +141,7 @@ public class MarkerMap extends FragmentActivity implements
                 if(selectedBus==null){
                     Toast.makeText(getApplication(),"No bus stop selected",Toast.LENGTH_LONG).show();
                 }else{
+                    sd.open();
                 realBusTimeInfo = new ArrayList<String>();
                 new loadBusTimeInfo(selectedBus).execute();
                 }
@@ -154,7 +155,7 @@ public class MarkerMap extends FragmentActivity implements
             @Override
             public void onClick(View v) {
                 if(selectedBus==null){
-                    Toast.makeText(getApplication(),"No bus stop selected",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(),"Functionality not completed",Toast.LENGTH_LONG).show();
                 }else{
                 savePreferences("busRef",selectedBus);
                 }
@@ -173,12 +174,12 @@ public class MarkerMap extends FragmentActivity implements
 
     private void savePreferences(String key, String value) {
 
-        SharedPreferences.Editor prefs = getSharedPreferences("busInfo", MODE_PRIVATE).edit();
+        /*SharedPreferences.Editor prefs = getSharedPreferences("busInfo", MODE_PRIVATE).edit();
         prefs.putString(key, value);
-        prefs.commit();
+        prefs.commit();*/
 
 
-        Toast.makeText(getApplicationContext(),"Saved Bus for Widget",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Functionality not completed",Toast.LENGTH_LONG).show();
 
     }
 
@@ -337,7 +338,7 @@ public class MarkerMap extends FragmentActivity implements
 
         readerBuild.append(receivedBus) ;
         readerURL=readerBuild.toString();
-        Toast.makeText(getApplicationContext(),readerURL,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),readerURL,Toast.LENGTH_LONG).show();
         InputStream isr = null;
         try{
             HttpClient httpclient = new DefaultHttpClient();
@@ -470,7 +471,12 @@ public class MarkerMap extends FragmentActivity implements
             rotation = AnimationUtils.loadAnimation(MarkerMap.this, R.anim.rotation_clockwise);
             rotation.setRepeatCount(Animation.INFINITE);
             refresh.startAnimation(rotation);
-            sd.animateOpen();
+            if(sd.isOpened()){
+
+            }else{
+                sd.animateOpen();
+            }
+
         }
 
         @Override

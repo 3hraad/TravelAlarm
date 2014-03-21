@@ -43,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="View Previous Geofences" />
+<!--
 
     <Button
             android:id="@+id/bGCMtest"
@@ -80,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Dummy GCM" />
+-->
 
 
 </LinearLayout>

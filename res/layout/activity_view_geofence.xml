@@ -8,13 +8,9 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/tvMaxId"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Get Max ID"
-            android:id="@+id/bGetMaxId"/>
+            android:textSize="20dp"
+            android:id="@+id/tvGeo"/>
+
     <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

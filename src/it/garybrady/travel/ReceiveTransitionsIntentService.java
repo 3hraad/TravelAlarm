@@ -171,7 +171,7 @@ public class ReceiveTransitionsIntentService extends IntentService {
         switch (transitionType) {
 
             case Geofence.GEOFENCE_TRANSITION_ENTER:
-                Toast.makeText(getApplicationContext(),"Enterd geofence",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),"Enterd geofence",Toast.LENGTH_LONG).show();
                 return getString(R.string.geofence_transition_entered);
 
             case Geofence.GEOFENCE_TRANSITION_EXIT:

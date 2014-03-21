@@ -14,7 +14,7 @@ import it.garybrady.traveldata.myDatabase;
 
 public class MyActivity extends Activity {
 
-    TextView test;
+    //TextView test;
     myDatabase dba;
 
     @Override
@@ -23,7 +23,7 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_main);
         StrictMode.enableDefaults();
         setUpButtons();
-        test = (TextView) findViewById(R.id.testView);
+        //test = (TextView) findViewById(R.id.testView);
     }
 
     private void addAddressToDB(String message) {
@@ -81,7 +81,7 @@ public class MyActivity extends Activity {
             }
         });
 
-        Button gcm = (Button) findViewById(R.id.bGCMtest);
+        /*Button gcm = (Button) findViewById(R.id.bGCMtest);
         gcm.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +119,7 @@ public class MyActivity extends Activity {
                 startActivity(gps);
             }
         });
-
+             */
     }
     /*@Override
     protected void onPause() {

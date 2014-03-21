@@ -19,6 +19,7 @@ public class myDatabase {
     private final DBhelper dbhelper;
     public static final String[] KEY_TITLE_ACTIVE = new String[] {constants.KEY_ID,constants.G_TITLE,constants.G_ACTIVE};
     public static final String[] KEY_TITLE = new String[] {constants.KEY_ID,constants.G_TITLE};
+    public static final String[] TITLE = new String[] {constants.G_TITLE};
     public static final String[] KEY_TITLE_LATLNG = new String[] {constants.KEY_ID,constants.G_TITLE,constants.G_LAT,constants.G_LNG};
 
     public myDatabase(Context c){
@@ -189,6 +190,18 @@ public class myDatabase {
         String where = constants.G_ACTIVE + "=" + 1;
         Cursor c = db.query(true, constants.GEO_TABLE, KEY_TITLE,
                 where, null, null, null, null, null);
+        if (c != null) {
+            c.moveToFirst();
+        }
+
+        return c;
+    }
+
+
+    public Cursor getActiveTitle(int id) {
+        String where = constants.G_ACTIVE + "=" + 1+" AND " + constants.KEY_ID+"="+id;
+        Cursor c = db.query(true, constants.GEO_TABLE, TITLE,
+                where,null, null,null, null, null);
         if (c != null) {
             c.moveToFirst();
         }

@@ -329,13 +329,13 @@ public class GeofenceConstruct extends FragmentActivity {
     /*
      * Inflate the app menu
      */
-    @Override
+ /*   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
 
-    }
+    }*/
     /*
      * Respond to menu item selections
      */
