@@ -1,6 +1,6 @@
 package it.garybrady.travel;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -9,59 +9,26 @@ import android.widget.*;
 import it.garybrady.traveldata.constants;
 import it.garybrady.traveldata.myDatabase;
 
-import java.util.List;
-
-
 /**
- * Created by Gary on 14/03/14.
+ * Created by Gary on 22/03/14.
  */
-public class ViewGeofences extends Activity {
+public class GeofenceCurrent extends ListActivity {
     myDatabase dba;
-    int maxId;
-    TextView geo;
+
     ListView currentGeo;
-    float historicX = Float.NaN, historicY = Float.NaN;
-    static final int DELTA = 50;
-    enum Direction {LEFT, RIGHT;}
-    TextView tvHeader;
+
     View header;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_geofence);
+        setContentView(R.layout.list_current_geo);
 
-        currentGeo=(ListView)findViewById(R.id.lvGeofence);
+        currentGeo=(ListView)findViewById(android.R.id.list);
         fillData();
         registerListClickCallback();
-        /*tvHeader = (TextView)findViewById(R.id.tvheader);
-        tvHeader.setText("Current Geofences");*/
-        header = View.inflate(this,R.layout.list_view_header,null);
-        currentGeo.addHeaderView(header);
-        currentGeo.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        historicX = event.getX();
-                        historicY = event.getY();
-                        break;
 
-                    case MotionEvent.ACTION_UP:
-                        if (event.getX() - historicX < -DELTA) {
 
-                            Toast.makeText(getApplicationContext(), "slide", Toast.LENGTH_LONG).show();
-                            return true;
-                        } else if (event.getX() - historicX > DELTA) {
-                            Toast.makeText(getApplicationContext(), "slide", Toast.LENGTH_LONG).show();
-                            return true;
-                        }
-                        break;
-                    default:
-                        return false;
-                }
-                return false;
-            }
-        });
         //loadListView();
     }
 

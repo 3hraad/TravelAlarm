@@ -81,6 +81,15 @@ public class MyActivity extends Activity {
             }
         });
 
+        Button allGeo=(Button)findViewById(R.id.bViewAllGeo);
+        allGeo.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MyActivity.this,ViewBothGeofences.class);
+                startActivity(i);
+            }
+        });
+
         /*Button gcm = (Button) findViewById(R.id.bGCMtest);
         gcm.setOnClickListener(new OnClickListener() {
             @Override

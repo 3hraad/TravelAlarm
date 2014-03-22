@@ -133,6 +133,17 @@
             </intent-filter>
         </activity>
         <activity
+                android:name=".ViewBothGeofences"
+                android:label="Current Geofences">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".GeofenceCurrent"/>
+        <activity android:name=".GeofencePrevious"/>
+        <activity
                 android:name=".ViewGeofences"
                 android:label="Current Geofences">
             <intent-filter>
