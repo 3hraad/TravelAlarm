@@ -34,6 +34,7 @@ public class GcmActivity extends Activity {
 
     public static String name;
     public static String email;
+    public static String password;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class GcmActivity extends Activity {
 
         name = i.getStringExtra("name");
         email = i.getStringExtra("email");
+        password=i.getStringExtra("password");
 
         // Make sure the device has the proper dependencies.
         GCMRegistrar.checkDevice(this);
@@ -93,7 +95,7 @@ public class GcmActivity extends Activity {
                     protected Void doInBackground(Void... params) {
                         // Register on our server
                         // On server creates a new user
-                        ServerUtilities.register(context, name, email, regId);
+                        ServerUtilities.register(context, name, email, regId,password);
                         return null;
                     }
 

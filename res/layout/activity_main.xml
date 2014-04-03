@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="GPS Alarm" />
 
-    <Button
+<!--    <Button
             android:id="@+id/bViewGeofence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,20 +42,20 @@
             android:id="@+id/bViewprevGeo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View Previous Geofences" />
+            android:text="View Previous Geofences" />-->
 
     <Button
             android:id="@+id/bViewAllGeo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="View Geofences" />
-<!--
 
-    <Button
+
+    <!--<Button
             android:id="@+id/bGCMtest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="GCM test" />
+            android:text="GCM test" />-->
 
     <Button
             android:id="@+id/bGCMreg"
@@ -64,7 +64,7 @@
             android:text="GCM register" />
 
 
-
+<!--
 
     <TextView
         android:id="@+id/testView"

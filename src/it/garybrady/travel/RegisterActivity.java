@@ -22,6 +22,7 @@ public class RegisterActivity extends Activity {
     // UI elements
     EditText txtName;
     EditText txtEmail;
+    EditText txtPassword;
 
     // Register button
     Button btnRegister;
@@ -55,6 +56,7 @@ public class RegisterActivity extends Activity {
 
         txtName = (EditText) findViewById(R.id.txtName);
         txtEmail = (EditText) findViewById(R.id.txtEmail);
+        txtPassword=(EditText) findViewById(R.id.txtPassword);
         btnRegister = (Button) findViewById(R.id.btnRegister);
 
         /*
@@ -67,9 +69,10 @@ public class RegisterActivity extends Activity {
                 // Read EditText dat
                 String name = txtName.getText().toString();
                 String email = txtEmail.getText().toString();
+                String password = txtPassword.getText().toString();
 
                 // Check if user filled the form
-                if(name.trim().length() > 0 && email.trim().length() > 0){
+                if(name.trim().length() > 0 && email.trim().length() > 0&& password.trim().length() > 0){
                     // Launch Main Activity
                     Intent i = new Intent(getApplicationContext(), GcmActivity.class);
 
@@ -77,6 +80,7 @@ public class RegisterActivity extends Activity {
                     // Sending registraiton details to MainActivity
                     i.putExtra("name", name);
                     i.putExtra("email", email);
+                    i.putExtra("password", password);
                     startActivity(i);
                     finish();
                 }else{

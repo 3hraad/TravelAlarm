@@ -545,6 +545,9 @@ public class MarkerMap extends FragmentActivity implements
             Toast.makeText(getApplicationContext(),"Times loaded",Toast.LENGTH_LONG).show();
             refresh.clearAnimation();
             //loadBusTimeInfo(clickedMarker.getTitle()).execute;
+            if(realBusTimeInfo.isEmpty()){
+                realBusTimeInfo.add(0,"No bus information available");
+            }
             ArrayAdapter<String> arrayAdapter=
                     new ArrayAdapter<String>(MarkerMap.this,android.R.layout.simple_list_item_1, realBusTimeInfo );
             busInfoList.setAdapter(arrayAdapter);

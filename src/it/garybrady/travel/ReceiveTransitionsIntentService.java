@@ -1,6 +1,7 @@
 package it.garybrady.travel;
 
 import android.app.Notification;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.google.android.gms.location.Geofence;
@@ -16,6 +17,7 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
+import it.garybrady.traveldata.myDatabase;
 
 import java.util.List;
 
@@ -63,12 +65,12 @@ public class ReceiveTransitionsIntentService extends IntentService {
 
             // Set the action and error message for the broadcast intent
             broadcastIntent.setAction(GeofenceUtils.ACTION_GEOFENCE_ERROR)
-                           .putExtra(GeofenceUtils.EXTRA_GEOFENCE_STATUS, errorMessage);
+                    .putExtra(GeofenceUtils.EXTRA_GEOFENCE_STATUS, errorMessage);
 
             // Broadcast the error *locally* to other components in this app
             LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
 
-        // If there's no error, get the transition type and create a notification
+            // If there's no error, get the transition type and create a notification
         } else {
 
             // Get the type of transition (entry or exit)
@@ -77,9 +79,9 @@ public class ReceiveTransitionsIntentService extends IntentService {
             // Test that a valid transition was reported
             if (
                     (transition == Geofence.GEOFENCE_TRANSITION_ENTER)
-                    ||
-                    (transition == Geofence.GEOFENCE_TRANSITION_EXIT)
-               ) {
+                            ||
+                            (transition == Geofence.GEOFENCE_TRANSITION_EXIT)
+                    ) {
 
                 // Post a notification
                 List<Geofence> geofences = LocationClient.getTriggeringGeofences(intent);
@@ -101,7 +103,7 @@ public class ReceiveTransitionsIntentService extends IntentService {
                 Log.d(GeofenceUtils.APPTAG,
                         getString(R.string.geofence_transition_notification_text));
 
-            // An invalid transition was reported
+                // An invalid transition was reported
             } else {
                 // Always log as an error
                 Log.e(GeofenceUtils.APPTAG,
@@ -110,13 +112,39 @@ public class ReceiveTransitionsIntentService extends IntentService {
         }
     }
 
-   private void sendNotification(String transitionType, String ids) {
-    Intent i = new Intent(this, TriggeredGeofence.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-       Bundle b = new Bundle();
-       b.putString("id",ids);
-       i.putExtras(b);
-       startActivity(i);
-}
+    private void sendNotification(String transitionType, String ids) {
+        Intent i = new Intent(this, TriggeredGeofence.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        int realAlarms=0;
+        String[] separated = ids.split(",");
+        for(int x=0;x<separated.length;x++){
+            if(getTitle(Integer.parseInt(separated[x])).equals("")){
+            }else{
+                realAlarms++;
+            }
+        }
+
+        if (realAlarms>0){
+
+        Bundle b = new Bundle();
+        b.putString("id",ids);
+        i.putExtras(b);
+        startActivity(i);
+        }
+    }
+
+    private String getTitle(int id){
+        String title="";
+        myDatabase dba=new myDatabase(this);
+        dba.open();
+        Cursor cursor=dba.getActiveTitle(id);
+        dba.close();
+        if(cursor.moveToFirst()){
+            title=cursor.getString(0);
+        }
+
+        return title;
+
+    }
 
     /**
      * Posts a notification in the notification bar when a transition is detected.

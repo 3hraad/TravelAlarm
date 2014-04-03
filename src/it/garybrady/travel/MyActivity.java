@@ -24,6 +24,34 @@ public class MyActivity extends Activity {
         StrictMode.enableDefaults();
         setUpButtons();
         //test = (TextView) findViewById(R.id.testView);
+        Bundle bun = getIntent().getExtras();
+//        geoIDs =  bun.getIntArray("id");
+
+        if(bun!=null){
+            String alarm=bun.getString("id",null);
+            Bundle b = new Bundle();
+            b.putString("id",alarm);
+            Intent i = new Intent(this, TriggeredGeofence.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.putExtras(b);
+            startActivity(i);
+
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Bundle bun = getIntent().getExtras();
+        if(bun!=null){
+            String alarm=bun.getString("id",null);
+            Bundle b = new Bundle();
+            b.putString("id",alarm);
+            Intent i = new Intent(this, TriggeredGeofence.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.putExtras(b);
+            startActivity(i);
+
+        }
     }
 
     private void addAddressToDB(String message) {
@@ -63,7 +91,7 @@ public class MyActivity extends Activity {
             }
         });
 
-        Button viewGeo=(Button)findViewById(R.id.bViewGeofence);
+        /*Button viewGeo=(Button)findViewById(R.id.bViewGeofence);
         viewGeo.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +107,7 @@ public class MyActivity extends Activity {
                 Intent i = new Intent(MyActivity.this,ViewPreviousGeo.class);
                 startActivity(i);
             }
-        });
+        });*/
 
         Button allGeo=(Button)findViewById(R.id.bViewAllGeo);
         allGeo.setOnClickListener(new OnClickListener() {
@@ -97,7 +125,7 @@ public class MyActivity extends Activity {
                 Intent gps = new Intent(MyActivity.this, GcmActivity.class);
                 startActivity(gps);
             }
-        });
+        });*/
 
         Button gcmReg = (Button) findViewById(R.id.bGCMreg);
         gcmReg.setOnClickListener(new OnClickListener() {
@@ -108,7 +136,7 @@ public class MyActivity extends Activity {
             }
         });
 
-        final Button subAdd = (Button) findViewById(R.id.bSubmitAddress);
+        /*final Button subAdd = (Button) findViewById(R.id.bSubmitAddress);
         subAdd.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
