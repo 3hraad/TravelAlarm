@@ -7,8 +7,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.widget.*;
 import com.google.android.gms.maps.model.*;
@@ -293,6 +296,12 @@ public class MapLongGeofence extends FragmentActivity implements
         return true;
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
     public boolean servicesOK() {
         int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
 
@@ -327,7 +336,7 @@ public class MapLongGeofence extends FragmentActivity implements
     }
 
     public void geoLocate(View v) throws IOException {
-
+        if (isNetworkAvailable()){
         et = (EditText) findViewById(R.id.etLongGeoLocate);
         String location = searchedLocation.getText().toString();
         if (location.length() == 0) {
@@ -347,6 +356,9 @@ public class MapLongGeofence extends FragmentActivity implements
         double lng = add.getLongitude();
 
         gotoLocation(lat, lng, DEFAULTZOOM);
+        }else{
+            Toast.makeText(getApplicationContext(),"Cannot connect, please check internet connection",Toast.LENGTH_LONG).show();
+        }
 
         //Add a marker to searched location
 		

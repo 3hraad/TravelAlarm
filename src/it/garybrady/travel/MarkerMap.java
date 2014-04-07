@@ -5,9 +5,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.view.animation.Animation;
@@ -59,6 +66,7 @@ public class MarkerMap extends FragmentActivity implements
     private static final int GPS_ERRORDIALOG_REQUEST = 9001;
     @SuppressWarnings("unused")
     private static final int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9002;
+    private static final int BUSCHECKER = 3333;
     GoogleMap mMap;
     EditText et;
     String webStopRef="http://192.3.177.209/liveInfo.php?RefNo=";
@@ -67,6 +75,8 @@ public class MarkerMap extends FragmentActivity implements
     ImageView refresh;
     Animation rotation;
     Button handle;
+    int eta,check;
+    private PendingIntent pendingIntent;
 
 
     private static final float DEFAULTZOOM = 15;
@@ -162,6 +172,18 @@ public class MarkerMap extends FragmentActivity implements
             }
         });
 
+        ImageView checkBusAlarm = (ImageView)findViewById(R.id.ivSetAlarm);
+        checkBusAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent i=new Intent(MarkerMap.this, DialogCheckBusAlarm.class);
+                startActivityForResult(i,BUSCHECKER);*/
+                Toast.makeText(getApplication(),"Functionality not completed",Toast.LENGTH_LONG).show();
+
+
+            }
+        });
+
 
     }
 
@@ -170,6 +192,37 @@ public class MarkerMap extends FragmentActivity implements
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == BUSCHECKER) {
+            if (data.hasExtra("eta")&& data.hasExtra("check")){
+                eta= data.getExtras().getInt("eta");
+                check=data.getExtras().getInt("check");
+                Toast.makeText(getApplicationContext(),eta+" "+check,Toast.LENGTH_LONG).show();
+                setAlarm();
+            }
+        }
+    }
+
+    private void setAlarm() {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.MONTH, 4);
+        calendar.set(Calendar.YEAR, 2014);
+        calendar.set(Calendar.DAY_OF_MONTH, 4);
+
+        calendar.set(Calendar.HOUR_OF_DAY, 16);
+        calendar.set(Calendar.MINUTE, 12);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.AM_PM, Calendar.PM);
+
+        Intent myIntent = new Intent(MarkerMap.this, MyReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(MarkerMap.this, 0, myIntent, 0);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
     private void savePreferences(String key, String value) {
@@ -217,7 +270,7 @@ public class MarkerMap extends FragmentActivity implements
     }
 
     public void geoLocate(View v) throws IOException {
-
+        if (isNetworkAvailable()) {
         et = (EditText) findViewById(R.id.etLongGeoLocate);
         String location = et.getText().toString();
         if (location.length() == 0) {
@@ -237,6 +290,9 @@ public class MarkerMap extends FragmentActivity implements
         double lng = add.getLongitude();
 
         gotoLocation(lat, lng, DEFAULTZOOM);
+        }else{
+            Toast.makeText(getApplicationContext(),"Cannot connect, please check internet connection",Toast.LENGTH_LONG).show();
+        }
 
         //Add a marker to searched location
 		
@@ -250,6 +306,13 @@ public class MarkerMap extends FragmentActivity implements
 		marker = mMap.addMarker(options);*/
 
 
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     private void hideSoftKeyboard(View v) {

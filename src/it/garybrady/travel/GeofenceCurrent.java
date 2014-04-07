@@ -49,6 +49,10 @@ public class GeofenceCurrent extends ListActivity {
         SimpleCursorAdapter notes =
                 new SimpleCursorAdapter(this, R.layout.geofence_titles, c, from, to);
         currentGeo.setAdapter(notes);
+        if (!c.moveToFirst()){
+            Toast.makeText(getApplicationContext(), "No Geofences Active", Toast.LENGTH_LONG).show();
+
+        }
     }
 
     private void registerListClickCallback() {
@@ -63,7 +67,7 @@ public class GeofenceCurrent extends ListActivity {
                     String title = cursor.getString(1);
                     int active = cursor.getInt(2);
                     String message = "id: " + idDB + "  title: " + title + "  active: " + active;
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                 }
             }
         });

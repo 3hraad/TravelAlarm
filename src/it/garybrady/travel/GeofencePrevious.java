@@ -48,7 +48,12 @@ public class GeofencePrevious extends ListActivity {
         SimpleCursorAdapter notes =
                 new SimpleCursorAdapter(this, R.layout.geofence_titles, c, from, to);
         previousGeo.setAdapter(notes);
+        if (!c.moveToFirst()){
+            Toast.makeText(getApplicationContext(), "No Previous Geofences Found", Toast.LENGTH_LONG).show();
+
+        }
     }
+
 
     private void registerListClickCallback() {
         previousGeo.setOnItemClickListener(new AdapterView.OnItemClickListener() {

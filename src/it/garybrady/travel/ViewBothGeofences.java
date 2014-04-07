@@ -35,4 +35,10 @@ public class ViewBothGeofences extends TabActivity {
         tabHost.addTab(prevSpec);
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

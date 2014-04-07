@@ -86,7 +86,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#FFF" >
+                android:background="#FFF"
+                android:paddingBottom="5dp">
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -99,6 +100,14 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="50dp"
                         android:src="@drawable/img_refresh"/>
+
+                <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/ivSetAlarm"
+                        android:clickable="true"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/img_stopwatch"/>
 
 
                 <ImageView

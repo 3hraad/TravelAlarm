@@ -57,11 +57,11 @@
             android:layout_height="wrap_content"
             android:text="GCM test" />-->
 
-    <Button
+  <!--  <Button
             android:id="@+id/bGCMreg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="GCM register" />
+            android:text="GCM register" />-->
 
 
 <!--

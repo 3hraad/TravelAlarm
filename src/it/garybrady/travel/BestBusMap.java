@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.view.animation.Animation;
@@ -155,7 +158,7 @@ public class BestBusMap extends FragmentActivity implements
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
-
+                if(isNetworkAvailable()){
                 if (destination!=null)
                 {
                     mDestination.remove();
@@ -170,6 +173,9 @@ public class BestBusMap extends FragmentActivity implements
 
                 destination=latLng;
                 plotMarkers("arrive");
+                } else{
+                    Toast.makeText(getApplicationContext(),"Cannot connect, please check internet connection",Toast.LENGTH_LONG).show();
+                }
             }
 
 
@@ -221,7 +227,12 @@ public class BestBusMap extends FragmentActivity implements
         return true;
     }
 
-
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
     public boolean servicesOK() {
         int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -257,7 +268,7 @@ public class BestBusMap extends FragmentActivity implements
     }
 
     public void geoLocate(View v) throws IOException {
-
+        if (isNetworkAvailable()){
         et = (EditText) findViewById(R.id.etLongGeoLocate);
         String location = et.getText().toString();
         if (location.length() == 0) {
@@ -277,6 +288,9 @@ public class BestBusMap extends FragmentActivity implements
         double lng = add.getLongitude();
 
         gotoLocation(lat, lng, DEFAULTZOOM);
+        }  else{
+                Toast.makeText(getApplicationContext(),"Cannot connect, please check internet connection",Toast.LENGTH_LONG).show();
+            }
 
         //Add a marker to searched location
 		
