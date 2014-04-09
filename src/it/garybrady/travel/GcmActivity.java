@@ -18,6 +18,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class GcmActivity extends Activity {
     // label to display gcm messages
@@ -79,12 +90,15 @@ public class GcmActivity extends Activity {
         if (regId.equals("")) {
             // Registration is not present, register now with GCM
             GCMRegistrar.register(this, SENDER_ID);
+
         } else {
             // Device is already registered on GCM
             if (GCMRegistrar.isRegisteredOnServer(this)) {
                 // Skips registration.
-                Toast.makeText(getApplicationContext(), "Already registered with GCM", Toast.LENGTH_LONG).show();
-            } else {
+                Toast.makeText(getApplicationContext(), "Device already registered", Toast.LENGTH_LONG).show();
+                finish();
+            } else
+            {
                 // Try to register again, but not in the UI thread.
                 // It's also necessary to cancel the thread onDestroy(),
                 // hence the use of AsyncTask instead of a raw thread.
@@ -101,7 +115,8 @@ public class GcmActivity extends Activity {
 
                     @Override
                     protected void onPostExecute(Void result) {
-                        mRegisterTask = null;
+                        Toast.makeText(getApplicationContext(), "Device registered", Toast.LENGTH_LONG).show();
+                        finish();
                     }
 
                 };
@@ -109,6 +124,72 @@ public class GcmActivity extends Activity {
             }
         }
     }
+
+
+
+
+
+
+
+    public boolean regCheck(String reg){
+
+        String temp = null;
+        String result = "";
+        InputStream isr = null;
+        String name="http://192.3.177.209/busMap/gcm/checkName.php?reg="+reg;
+
+
+
+
+        try{
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(name);
+            HttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
+            isr = entity.getContent();
+        }
+        catch(Exception e){
+            Log.e("log_tag", "Error in http connection " + e.toString());
+
+        }
+        //convert response to string
+        try{
+            BufferedReader reader = new BufferedReader(new InputStreamReader(isr,"iso-8859-1"),8);
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            isr.close();
+
+            result=sb.toString();
+        }
+        catch(Exception e){
+            Log.e("log_tag", "Error  converting result "+e.toString());
+        }
+
+        //parse json data
+        try {
+            String s = "";
+            JSONArray jArray = new JSONArray(result);
+
+            for(int i=0; i<jArray.length();i++){
+                JSONObject json = jArray.getJSONObject(i);
+                temp=json.getString("id");
+
+            }
+            Toast.makeText(getApplicationContext(),temp, Toast.LENGTH_LONG).show();
+            return false;
+
+        } catch (Exception e) {
+
+            Log.e("log_tag", "Error Parsing Data "+e.toString());
+            return true;
+        }
+
+
+    }
+
 
     /**
      * Receiving push messages
@@ -120,18 +201,21 @@ public class GcmActivity extends Activity {
             // Waking up mobile if it is sleeping
             WakeLocker.acquire(getApplicationContext());
 
-            /**
+            /*
              * Take appropriate action on this message
              * depending upon your app requirement
              * For now i am just displaying it on the screen
              * */
 
             // Showing received message
-            lblMessage.append(newMessage + "\n");
-            Toast.makeText(getApplicationContext(), "New Message: " + newMessage, Toast.LENGTH_LONG).show();
+            //lblMessage.append(newMessage + "\n");
+            //Toast.makeText(getApplicationContext(), "New Message: " + newMessage, Toast.LENGTH_LONG).show();
 
             // Releasing wake lock
             WakeLocker.release();
+            Toast.makeText(getApplicationContext(), "Device registered", Toast.LENGTH_LONG).show();
+
+            finish();
         }
     };
 

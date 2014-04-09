@@ -127,14 +127,15 @@ public class MyActivity extends Activity {
             }
         });*/
 
-        /*Button gcmReg = (Button) findViewById(R.id.bGCMreg);
+        Button gcmReg = (Button) findViewById(R.id.bGCMreg);
         gcmReg.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent gps = new Intent(MyActivity.this, RegisterActivity.class);
                 startActivity(gps);
             }
-        });*/
+        });
+
 
         /*final Button subAdd = (Button) findViewById(R.id.bSubmitAddress);
         subAdd.setOnClickListener(new OnClickListener() {

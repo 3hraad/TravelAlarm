@@ -40,7 +40,6 @@ public class GCMmap extends FragmentActivity implements
     private static final int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9002;
     GoogleMap mMap;
     EditText et;
-    String webStopRef="http://192.3.177.209/liveInfo.php?RefNo=";
     String receivedAddress=null;
     myDatabase dba = new myDatabase(this);
 
@@ -53,10 +52,7 @@ public class GCMmap extends FragmentActivity implements
     LocationClient mLocationClient;
     Marker marker;
     SlidingDrawer sd;
-    //WebView wb;
-    String webSite="http://www.rtpi.ie/Popup_Content/WebDisplay/WebDisplay.aspx?stopRef=";
-    ArrayList<String> realBusTimeInfo;
-    ListView busInfoList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +74,13 @@ public class GCMmap extends FragmentActivity implements
             Toast.makeText(this, "shit yo, no gs!", Toast.LENGTH_SHORT).show();
         }
         sd = (SlidingDrawer) findViewById(R.id.slidingDrawer2);
+        et = (EditText) findViewById(R.id.etLongGeoLocate);
 
 
         dba.open();
         receivedAddress=dba.getMostRecentAddress();
         dba.close();
+        et.setText(receivedAddress);
 
 
 
@@ -95,7 +93,6 @@ public class GCMmap extends FragmentActivity implements
 
     public void gcmGoto(String address) throws IOException {
 
-        et = (EditText) findViewById(R.id.etLongGeoLocate);
         String location = address.toString();
         if (location.length() == 0) {
             Toast.makeText(this, "No location Received", Toast.LENGTH_SHORT).show();
