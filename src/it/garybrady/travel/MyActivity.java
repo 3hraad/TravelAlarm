@@ -136,6 +136,15 @@ public class MyActivity extends Activity {
             }
         });
 
+        /*Button testAlarms = (Button) findViewById(R.id.bAlarmTest);
+        testAlarms.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent al = new Intent(MyActivity.this, AlarmManagerActivity.class);
+                startActivity(al);
+            }
+        });*/
+
 
         /*final Button subAdd = (Button) findViewById(R.id.bSubmitAddress);
         subAdd.setOnClickListener(new OnClickListener() {

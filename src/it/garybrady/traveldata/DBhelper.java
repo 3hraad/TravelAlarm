@@ -25,6 +25,16 @@ public class DBhelper extends SQLiteOpenHelper{
 
             "); ";
 
+    private static final String CREATE_ALARM_TABLE="create table "+
+            constants.A_TABLE+" ("+
+            constants.KEY_ID +" integer primary key autoincrement, "+
+            constants.A_BUS +" text not null,"+
+            constants.A_REF +" text not null,"+
+            constants.A_ETA +" text not null"+
+
+
+            "); ";
+
 /*
     public static final String KEY_ID="_id";
     public static final String GEO_TABLE="geofence";
@@ -50,6 +60,7 @@ public class DBhelper extends SQLiteOpenHelper{
             //try to create the table
             db.execSQL(CREATE_TABLE);
             db.execSQL(CREATE_GEO_TABLE);
+            db.execSQL(CREATE_ALARM_TABLE);
         } catch(SQLiteException ex) {
             Log.e("Create table exception", ex.getMessage());
         }
@@ -64,6 +75,7 @@ public class DBhelper extends SQLiteOpenHelper{
                 +", which will destroy all old data");
         db.execSQL("drop table if exists "+constants.TABLE_NAME);
         db.execSQL("drop table if exists "+constants.GEO_TABLE);
+        db.execSQL("drop table if exists "+constants.A_TABLE);
         onCreate(db);
     }
 }

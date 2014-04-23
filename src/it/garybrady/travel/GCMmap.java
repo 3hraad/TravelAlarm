@@ -1,5 +1,29 @@
 package it.garybrady.travel;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.widget.*;
+import com.google.android.gms.maps.model.*;
+import it.garybrady.traveldata.myDatabase;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.app.Dialog;
 import android.location.Address;
 import android.location.Geocoder;
@@ -7,12 +31,14 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SlidingDrawer;
-import android.widget.Toast;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
+
+import it.garybrady.travel.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -20,16 +46,8 @@ import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import it.garybrady.traveldata.myDatabase;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GCMmap extends FragmentActivity implements
         GooglePlayServicesClient.ConnectionCallbacks,
@@ -40,8 +58,19 @@ public class GCMmap extends FragmentActivity implements
     private static final int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9002;
     GoogleMap mMap;
     EditText et;
-    String receivedAddress=null;
+    String webStopRef="http://192.3.177.209/liveInfo.php?RefNo=";
+    String receivedBus=null;
+    String selectedBus=null;
+    Circle circle;
+    SeekBar radiusSeekbar;
+    Switch  radiusSwitch;
+    Button go,setAlarm;
+    EditText searchedLocation;
+    String receivedAddress;
+    double rec_lat,rec_lng;
+    int rec_id;
     myDatabase dba = new myDatabase(this);
+
 
 
 
@@ -52,14 +81,18 @@ public class GCMmap extends FragmentActivity implements
     LocationClient mLocationClient;
     Marker marker;
     SlidingDrawer sd;
-
+    ProgressBar loadBusInfo;
+    //WebView wb;
+    String webSite="http://www.rtpi.ie/Popup_Content/WebDisplay/WebDisplay.aspx?stopRef=";
+    ArrayList<String> realBusTimeInfo;
+    ListView busInfoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (servicesOK()) {
-            setContentView(R.layout.activity_map);
+            setContentView(R.layout.activity_map_long_geofence);
             StrictMode.enableDefaults();
             if (initMap()) {
                 mMap.setMyLocationEnabled(true);
@@ -71,63 +104,148 @@ public class GCMmap extends FragmentActivity implements
             }
         }
         else {
-            Toast.makeText(this, "shit yo, no gs!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "shit yo!", Toast.LENGTH_SHORT).show();
         }
-        sd = (SlidingDrawer) findViewById(R.id.slidingDrawer2);
+
         et = (EditText) findViewById(R.id.etLongGeoLocate);
 
+        go=(Button)findViewById(R.id.bLongGeoLocate);
+        go.setVisibility(View.VISIBLE);
+
+        setAlarm=(Button)findViewById(R.id.bSetLongGeofence);
+        setAlarm.setVisibility(View.INVISIBLE);
+
+        searchedLocation=(EditText)findViewById(R.id.etLongGeoLocate);
+        searchedLocation.setVisibility(View.VISIBLE);
+
+        radiusSeekbar=(SeekBar)findViewById(R.id.sbRadius);
+        radiusSeekbar.setVisibility(View.INVISIBLE);
+
+        radiusSeekbar.setMax(1000);
+        radiusSeekbar.setProgress(50);
+        radiusSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setRadius(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                displayRadius();
+            }
+        });
+
+        radiusSwitch=(Switch)findViewById(R.id.swRadius);
+        radiusSwitch.setVisibility(View.INVISIBLE);
+        radiusSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setRadius(radiusSeekbar.getProgress());
+                displayRadius();
+            }
+        });
+
+        //set space for radius tools
+        mMap.setPadding(0,70,0,70);
+        mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+
+            @Override
+            public boolean onMarkerClick(Marker clickedMarker) {
+                clickedMarker.hideInfoWindow();
+
+                return false;
+            }
+        });
+
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                setUpMarker(latLng);
+
+            }
+
+        });
+
+        mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+                circle.setCenter(marker.getPosition());
+                circle.setStrokeWidth(5);
+            }
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+                circle.setCenter(marker.getPosition());
+                circle.setStrokeWidth(10);
+                circle.setStrokeColor(Color.BLUE);
+                circle.setFillColor(0x6F323299);
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+                circle.setCenter(marker.getPosition());
+                circle.setStrokeWidth(3);
+                circle.setStrokeColor(Color.WHITE);
+            }
+        });
+
+        setAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle pass = new Bundle();
+
+                pass.putDouble("lat", marker.getPosition().latitude);
+                pass.putDouble("lng", marker.getPosition().longitude);
+                pass.putDouble("radius", circle.getRadius());
+                Intent i = new Intent(GCMmap.this,GeofenceConstruct.class);
+                i.putExtras(pass);
+                startActivity(i);
+                finish();
+            }
+        });
 
         dba.open();
-        receivedAddress=dba.getMostRecentAddress();
+
+        receivedAddress = dba.getMostRecentAddress();
         dba.close();
-        et.setText(receivedAddress);
 
+    }
 
+    private void displayRadius() {
 
-        try {
-            gcmGoto(receivedAddress);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(radiusSwitch.isChecked()){
+            if(radiusSeekbar.getProgress()<50){
+                Toast.makeText(getApplicationContext(),"Use meters instead of kilometers for a smaller radius",Toast.LENGTH_LONG).show();
+                radiusSeekbar.setProgress(50);
+            }else{
+                Toast.makeText(getApplicationContext(),"Radius Distance: "+circle.getRadius()/1000+"Km",Toast.LENGTH_LONG).show();
+            }
+        }else{
+            if(radiusSeekbar.getProgress()<50){
+                Toast.makeText(getApplicationContext(),"Minimum Distance is 50m",Toast.LENGTH_LONG).show();
+                radiusSeekbar.setProgress(50);
+            }else{
+                Toast.makeText(getApplicationContext(),"Radius Distance: "+circle.getRadius()+"m",Toast.LENGTH_LONG).show();
+            }
         }
     }
 
-    public void gcmGoto(String address) throws IOException {
-
-        String location = address.toString();
-        if (location.length() == 0) {
-            Toast.makeText(this, "No location Received", Toast.LENGTH_SHORT).show();
-            return;
+    private void setRadius(int progress) {
+        int tempRadius=0;
+        if(radiusSwitch.isChecked()){
+            tempRadius= progress*4;
+            circle.setRadius(tempRadius);
+        }else{
+            tempRadius= progress;
+            circle.setRadius(tempRadius);
         }
-
-
-
-        Geocoder gc = new Geocoder(this);
-        List<Address> list = gc.getFromLocationName(location, 1);
-        Address add = list.get(0);
-        String locality = add.getLocality();
-        Toast.makeText(this, locality, Toast.LENGTH_LONG).show();
-
-        double lat = add.getLatitude();
-        double lng = add.getLongitude();
-
-
-
-        //Add a marker to searched location
-
-		if(marker !=null){
-			marker.remove();
-		}
-
-		MarkerOptions options = new MarkerOptions()
-			.title(locality)
-			.position(new LatLng(lat,lng));
-		marker = mMap.addMarker(options);
-        //gotoLocation(lat, lng, DEFAULTZOOM);
-
-        LatLng ll = new LatLng(lat, lng);
-        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(ll, DEFAULTZOOM);
-        mMap.moveCamera(update);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -135,6 +253,12 @@ public class GCMmap extends FragmentActivity implements
         return true;
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
     public boolean servicesOK() {
         int isAvailable = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
 
@@ -168,6 +292,118 @@ public class GCMmap extends FragmentActivity implements
 
     }
 
+    public void setUpMarker(LatLng latLng){
+        mMap.clear();
+        radiusSwitch.setVisibility(View.VISIBLE);
+        radiusSeekbar.setVisibility(View.VISIBLE);
+        MarkerOptions options = new MarkerOptions()
+                .position(latLng);
+        marker = mMap.addMarker(options);
+        marker.setDraggable(true);
+        circle=mMap.addCircle(new CircleOptions()
+                .center(latLng)
+                .radius(50)
+                .strokeColor(Color.WHITE)
+                .strokeWidth(3)
+                .fillColor(0x6F323299)
+
+        );
+        go.setVisibility(View.INVISIBLE);
+        setAlarm.setVisibility(View.VISIBLE);
+        searchedLocation.setVisibility(View.INVISIBLE);
+        gotoLocation(marker.getPosition().latitude,marker.getPosition().longitude, DEFAULTZOOM);
+
+    }
+
+    public void gotoGCMaddress(String location) throws IOException {
+        if (isNetworkAvailable()){
+            if (location.length() == 0) {
+                Toast.makeText(this, "No address sent", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+            Geocoder gc = new Geocoder(this);
+            List<Address> list = gc.getFromLocationName(location, 1);
+
+            try {
+                Address add = list.get(0);
+                String locality = add.getLocality();
+                Toast.makeText(this, locality, Toast.LENGTH_LONG).show();
+
+                double lat = add.getLatitude();
+                double lng = add.getLongitude();
+                LatLng latLng= new LatLng(lat,lng);
+
+                setUpMarker(latLng);
+            }catch (Exception e){
+                searchedLocation.setText(receivedAddress);
+                Toast.makeText(getApplicationContext(),"Address cannot be found\nPlease search again",Toast.LENGTH_LONG).show();
+
+
+            }
+
+        }else{
+            Toast.makeText(getApplicationContext(),"Cannot connect, please check internet connection",Toast.LENGTH_LONG).show();
+        }
+
+        //Add a marker to searched location
+		
+		/*if(marker !=null){
+			marker.remove();
+		}
+		
+		MarkerOptions options = new MarkerOptions()
+			.title(locality)
+			.position(new LatLng(lat,lng));
+		marker = mMap.addMarker(options);*/
+
+
+    }
+
+    public void geoLocate(View v) throws IOException {
+        if (isNetworkAvailable()){
+            et = (EditText) findViewById(R.id.etLongGeoLocate);
+            String location = searchedLocation.getText().toString();
+            if (location.length() == 0) {
+                Toast.makeText(this, "Please enter a location", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            hideSoftKeyboard(v);
+
+            Geocoder gc = new Geocoder(this);
+            List<Address> list = gc.getFromLocationName(location, 1);
+            Address add = list.get(0);
+            String locality = add.getLocality();
+            Toast.makeText(this, locality, Toast.LENGTH_LONG).show();
+
+            double lat = add.getLatitude();
+            double lng = add.getLongitude();
+
+            gotoLocation(lat, lng, DEFAULTZOOM);
+        }else{
+            Toast.makeText(getApplicationContext(),"Cannot connect, please check internet connection",Toast.LENGTH_LONG).show();
+        }
+
+        //Add a marker to searched location
+
+		/*if(marker !=null){
+			marker.remove();
+		}
+
+		MarkerOptions options = new MarkerOptions()
+			.title(locality)
+			.position(new LatLng(lat,lng));
+		marker = mMap.addMarker(options);*/
+
+
+    }
+
+    private void hideSoftKeyboard(View v) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -207,11 +443,11 @@ public class GCMmap extends FragmentActivity implements
         super.onResume();
         MapStateManager mgr = new MapStateManager(this);
         CameraPosition position = mgr.getSavedCameraPosition();
-        /*if (position != null) {
+        if (position != null) {
             CameraUpdate update = CameraUpdateFactory.newCameraPosition(position);
             mMap.moveCamera(update);
             mMap.setMapType(mgr.getSavedMapType());
-        }*/
+        }
 
     }
 
@@ -234,13 +470,17 @@ public class GCMmap extends FragmentActivity implements
     @Override
     public void onConnected(Bundle arg0) {
 //		Toast.makeText(this, "Connected to location service", Toast.LENGTH_SHORT).show();
+        try {
+            gotoGCMaddress(receivedAddress);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public void onDisconnected() {
     }
-
-
 
 
 

@@ -20,6 +20,7 @@ import android.preference.PreferenceManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
+import it.garybrady.traveldata.myDatabase;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -75,7 +76,10 @@ public class MarkerMap extends FragmentActivity implements
     ImageView refresh;
     Animation rotation;
     Button handle;
-    int eta,check;
+    myDatabase dba = new myDatabase(this);
+    private AlarmManagerBroadcastReceiver alarm = new AlarmManagerBroadcastReceiver();
+
+    String busCheck, eta;
     private PendingIntent pendingIntent;
 
 
@@ -176,9 +180,10 @@ public class MarkerMap extends FragmentActivity implements
         checkBusAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent i=new Intent(MarkerMap.this, DialogCheckBusAlarm.class);
-                startActivityForResult(i,BUSCHECKER);*/
-                Toast.makeText(getApplication(),"Functionality not completed",Toast.LENGTH_LONG).show();
+                Intent i=new Intent(MarkerMap.this, DialogCheckBusAlarm.class);
+                startActivityForResult(i,BUSCHECKER);
+
+                //Toast.makeText(getApplication(),"Functionality not completed",Toast.LENGTH_LONG).show();
 
 
             }
@@ -197,33 +202,27 @@ public class MarkerMap extends FragmentActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == BUSCHECKER) {
-            if (data.hasExtra("eta")&& data.hasExtra("check")){
-                eta= data.getExtras().getInt("eta");
-                check=data.getExtras().getInt("check");
-                Toast.makeText(getApplicationContext(),eta+" "+check,Toast.LENGTH_LONG).show();
+            if (data.hasExtra("eta")&& data.hasExtra("bus")){
+                eta= data.getExtras().getString("eta");
+                busCheck=data.getExtras().getString("bus");
+                dba.open();
+                dba.insertAlarm(busCheck,selectedBus,eta);
+                dba.close();
                 setAlarm();
             }
         }
     }
 
-    private void setAlarm() {
-        Calendar calendar = Calendar.getInstance();
-
-        calendar.set(Calendar.MONTH, 4);
-        calendar.set(Calendar.YEAR, 2014);
-        calendar.set(Calendar.DAY_OF_MONTH, 4);
-
-        calendar.set(Calendar.HOUR_OF_DAY, 16);
-        calendar.set(Calendar.MINUTE, 12);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.AM_PM, Calendar.PM);
-
-        Intent myIntent = new Intent(MarkerMap.this, MyReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(MarkerMap.this, 0, myIntent, 0);
-
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+    public void setAlarm()
+    {
+        Context context = this.getApplicationContext();
+        if(alarm != null){
+            alarm.SetAlarm(context);
+        }else{
+            Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+        }
     }
+
 
     private void savePreferences(String key, String value) {
 

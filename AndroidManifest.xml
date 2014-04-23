@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="it.garybrady.travel"
           android:versionCode="1"
-          android:versionName="Travel Alarm 1.1">
+          android:versionName="Travel Alarm 1.4">
     <uses-sdk
-            android:minSdkVersion="14"
+            android:minSdkVersion="16"
             android:targetSdkVersion="17" />
 
     <permission
@@ -91,7 +91,7 @@
 
         <activity
                 android:name="it.garybrady.travel.MyActivity"
-                android:label="Travel Alarm v1.3"
+                android:label="Travel Alarm v1.4"
                 android:screenOrientation="portrait"
 
                 >
@@ -250,10 +250,14 @@
                 android:theme="@android:style/Theme.Holo.Dialog"
                 android:screenOrientation="portrait"
                 />
-        <service android:name=".MyAlarmService"
-                 android:enabled="true" />
+        <activity android:name=".AlarmTest" android:label="Test Alarm"/>
 
-        <receiver android:name=".MyReceiver"/>
+        <activity android:name=".AlarmManagerActivity" android:label="Test Alarm"/>
+        <activity android:name=".AlarmStopRepeating" android:label="Travel Alarm"/>
+        <activity android:name=".AlarmContinueRepeating" android:label="Travel Alarm"/>
+
+        <receiver android:name=".AlarmManagerBroadcastReceiver">
+                    </receiver>
 
         <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"

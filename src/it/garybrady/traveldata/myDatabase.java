@@ -232,4 +232,45 @@ public class myDatabase {
 
         }
     }
+
+    public long insertAlarm(String bus,String ref, String eta)
+    {
+        try{
+            ContentValues newTaskValue = new ContentValues();
+            newTaskValue.put(constants.A_BUS, bus);
+            newTaskValue.put(constants.A_REF, ref);
+            newTaskValue.put(constants.A_ETA, eta);
+            return db.insert(constants.A_TABLE, null, newTaskValue);
+        } catch(SQLiteException ex) {
+            Log.v("Insert into database exception caught",
+                    ex.getMessage());
+            return -1;
+        }
+    }
+
+    //returns a most recent address saved
+    public String[] getMostRecentAlarm()
+    {
+
+        //limit of 1, ordered by id
+        Cursor c = db.rawQuery("SELECT " + constants.A_BUS +", "+constants.A_REF+", "+constants.A_ETA+ " FROM "+constants.A_TABLE +"  ORDER BY "+constants.KEY_ID+" DESC LIMIT 1",null);
+
+
+        String result[]=new String[3];
+
+        int iRow = c.getColumnIndex(constants.KEY_ID);
+        int iBus = c.getColumnIndex(constants.A_BUS);
+        int iRef = c.getColumnIndex(constants.A_REF);
+        int iEta = c.getColumnIndex(constants.A_ETA);
+
+        //iterate through each result and add it to the result string
+        for(c.moveToFirst(); !c.isAfterLast();c.moveToNext()){
+            result[0]=c.getString(iBus);
+            result[1]=c.getString(iRef);
+            result[2]=c.getString(iEta);
+
+        }
+        c.close();
+        return result;
+    }
  }

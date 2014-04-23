@@ -32,26 +32,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Check Interval"
+            android:text="Bus Number"
             android:id="@+id/textView2" android:layout_below="@+id/npTime" android:layout_alignParentLeft="true"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Warning: The lower the check interval the more battery it will use"
-            android:id="@+id/textView3"
-            android:textColor="#ff000d"
-            android:layout_below="@+id/textView2" android:layout_toLeftOf="@+id/npCheckInterval"/>
+    <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Warning: The lower the check interval the more battery it will use"-->
+            <!--android:id="@+id/textView3"-->
+            <!--android:textColor="#ff000d"-->
+            <!--android:layout_below="@+id/textView2" android:layout_toLeftOf="@+id/npBusNoPick"/>-->
     <NumberPicker
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/npCheckInterval"
+            android:id="@+id/npBusNoPick"
             android:layout_below="@+id/textView2" android:layout_alignLeft="@+id/npTime"/>
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set Alarm"
             android:id="@+id/bSetBusChecker"
-            android:layout_marginTop="36dp" android:layout_below="@+id/npCheckInterval"
+            android:layout_marginTop="36dp" android:layout_below="@+id/npBusNoPick"
             android:layout_centerHorizontal="true"/>
 
 

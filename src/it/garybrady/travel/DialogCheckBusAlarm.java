@@ -6,16 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
-import android.widget.Toast;
 
 /**
  * Created by Gary on 04/04/14.
  */
 public class DialogCheckBusAlarm extends Activity {
-    NumberPicker checkInterval, etaAlarm;
-    String eta[]={"5","10","15"};
-    String check[]={"1","2","5"};
-    int iETA, iCheck;
+    NumberPicker busPicker, etaAlarm;
+    String eta[]={"5 Mins","10 Mins","15 Mins"};
+    String busNo[]={"205","208","201"};
+
+    String iETA=null,bus=null;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -28,20 +28,20 @@ public class DialogCheckBusAlarm extends Activity {
 
 
 
-        checkInterval=(NumberPicker)findViewById(R.id.npCheckInterval);
-        checkInterval.setMinValue(1);
-        checkInterval.setMaxValue(3);
-        checkInterval.setDisplayedValues(check);
+        busPicker=(NumberPicker)findViewById(R.id.npBusNoPick);
+        busPicker.setMinValue(1);
+        busPicker.setMaxValue(3);
+        busPicker.setDisplayedValues(busNo);
 
         Button setAlarm = (Button) findViewById(R.id.bSetBusChecker);
         setAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iETA= Integer.parseInt(eta[etaAlarm.getValue()-1].toString());
-                iCheck=Integer.parseInt(check[checkInterval.getValue()-1].toString());
+                iETA= eta[etaAlarm.getValue()-1].toString();
+                bus=busNo[busPicker.getValue()-1].toString();
                 Intent data= new Intent();
                 data.putExtra("eta",iETA);
-                data.putExtra("check",iCheck);
+                data.putExtra("bus",bus);
                 setResult(RESULT_OK, data);
                 finish();
             }
