@@ -169,7 +169,7 @@ public class MarkerMap extends FragmentActivity implements
             @Override
             public void onClick(View v) {
                 if(selectedBus==null){
-                    Toast.makeText(getApplication(),"Functionality not completed",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(),"No Bus Selected",Toast.LENGTH_LONG).show();
                 }else{
                 savePreferences("busRef",selectedBus);
                 }
@@ -217,6 +217,11 @@ public class MarkerMap extends FragmentActivity implements
     {
         Context context = this.getApplicationContext();
         if(alarm != null){
+            alarm.CancelAlarm(context);
+        }else{
+            Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+        }
+        if(alarm != null){
             alarm.SetAlarm(context);
         }else{
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
@@ -226,12 +231,12 @@ public class MarkerMap extends FragmentActivity implements
 
     private void savePreferences(String key, String value) {
 
-        /*SharedPreferences.Editor prefs = getSharedPreferences("busInfo", MODE_PRIVATE).edit();
+        SharedPreferences.Editor prefs = getSharedPreferences("busInfo", MODE_PRIVATE).edit();
         prefs.putString(key, value);
-        prefs.commit();*/
+        prefs.commit();
 
 
-        Toast.makeText(getApplicationContext(),"Functionality not completed",Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),"Functionality not completed",Toast.LENGTH_LONG).show();
 
     }
 
@@ -324,6 +329,12 @@ public class MarkerMap extends FragmentActivity implements
 
         switch (item.getItemId()) {
 
+            case R.id.cancelAlarm:
+                Context context = this.getApplicationContext();
+                if(alarm != null){
+                    alarm.CancelAlarm(context);
+                }
+                break;
             case R.id.mapTypeNormal:
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 break;

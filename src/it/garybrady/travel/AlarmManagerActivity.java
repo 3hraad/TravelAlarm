@@ -23,31 +23,11 @@ public class AlarmManagerActivity extends Activity {
 
 
 
-        if (b!=null){
-            if (b.getInt("stop",0)!=0){
-
-                Toast.makeText(getApplicationContext(),"ok Reviced" + b.getInt("stop"), Toast.LENGTH_LONG).show();
-                notificationManager.cancel(1);
-
-
-
-            }else if (b.getInt("repeat",0)!=0){
-
-
-                Toast.makeText(getApplicationContext(),"Repeat Reviced " +b.getInt("repeat"), Toast.LENGTH_LONG).show();
-                notificationManager.cancel(1);
+        notificationManager.cancel(1);
 
 
 
 
-            }else{
-                Toast.makeText(getApplicationContext(),"Whats that now? - " + b.getInt("stop",0), Toast.LENGTH_LONG).show();
-                notificationManager.cancel(1);
-            }
-
-
-
-        }
     }
 
 

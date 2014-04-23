@@ -37,7 +37,7 @@ public class RegisterActivity extends Activity {
     // UI elements
     EditText txtName;
     EditText txtEmail;
-    EditText txtPassword;
+    EditText txtPassword,txtPasswordRepeat;
 
     // Register button
     Button btnRegister;
@@ -72,6 +72,7 @@ public class RegisterActivity extends Activity {
         txtName = (EditText) findViewById(R.id.txtName);
         txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtPassword=(EditText) findViewById(R.id.txtPassword);
+        txtPasswordRepeat=(EditText) findViewById(R.id.txtPasswordRepeat);
         btnRegister = (Button) findViewById(R.id.btnRegister);
 
         /*
@@ -86,7 +87,8 @@ public class RegisterActivity extends Activity {
                 String name = txtName.getText().toString();
                 String email = txtEmail.getText().toString();
                 String password = txtPassword.getText().toString();
-                if(!checkFields(name,email,password)){
+                String repeat = txtPasswordRepeat.getText().toString();
+                if(!checkFields(name,email,password,repeat)){
                     Toast.makeText(getApplicationContext(),"Please fill in all fields correctly", Toast.LENGTH_LONG).show();
                 }else{
                     // Check if user filled the form
@@ -111,15 +113,17 @@ public class RegisterActivity extends Activity {
         });
     }
 
-    public boolean checkFields(String name, String email, String pass){
-        TextView tvName,tvEmail,tvPassword;
+    public boolean checkFields(String name, String email, String pass, String repeat){
+        TextView tvName,tvEmail,tvPassword, tvPasswordRepeat;
         tvName = (TextView) findViewById(R.id.tvName);
         tvEmail = (TextView) findViewById(R.id.tvEmail);
         tvPassword = (TextView) findViewById(R.id.tvPass);
+        tvPasswordRepeat = (TextView) findViewById(R.id.tvPassRepeat);
 
         tvName.setTextColor(Color.BLACK);
         tvEmail.setTextColor(Color.BLACK);
         tvPassword.setTextColor(Color.BLACK);
+        tvPasswordRepeat.setTextColor(Color.BLACK);
 
         int x=0;
 
@@ -134,6 +138,10 @@ public class RegisterActivity extends Activity {
         }
         if (pass.length()<6){
             tvPassword.setTextColor(Color.RED);
+            x++;
+        }
+        if (!repeat.equals(pass)){
+            tvPasswordRepeat.setTextColor(Color.RED);
             x++;
         }
 

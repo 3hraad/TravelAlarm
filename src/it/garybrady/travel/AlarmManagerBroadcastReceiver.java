@@ -204,8 +204,11 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     private void sendNotif() {
         //Toast.makeText(c,"get yo bus",Toast.LENGTH_LONG).show();
-        //notificationManager = getNotificationManager();
+        notificationManager = getNotificationManager();
         Intent stopCheck = new Intent(c, AlarmStopRepeating.class);
+
+        //Intent stopCheck = new Intent(c, AlarmManagerActivity.class);
+
         //stopCheck.putExtra("stop", 11);
 
         Bundle ok = new Bundle();
@@ -222,19 +225,21 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 .setContentTitle("Travel Alarm")
                 .setContentText(notificationDeets)
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setOngoing(true)
+                        .setAutoCancel(true)
+
+                //.setOngoing(true)
 //                .setPriority(Notification.PRIORITY_HIGH)
 
 
                 .addAction(
                         R.drawable.img_notification_done,
                         "Stop Alarm",
-                        PendingIntent.getActivity(c, 0, stopCheck, 0, null))
+                        PendingIntent.getActivity(c, 0, stopCheck, PendingIntent.FLAG_CANCEL_CURRENT, null))
 
                 .addAction(
                         R.drawable.img_notification_restart,
                         "Reset Alarm",
-                        PendingIntent.getActivity(c, 0, repeatCheck, 0, null));
+                        PendingIntent.getActivity(c, 0, repeatCheck, PendingIntent.FLAG_CANCEL_CURRENT, null));
 
 
 
@@ -246,8 +251,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
         // Get an instance of the NotificationManager service
         // Get an instance of the NotificationManager service
-        NotificationManagerCompat notificationManager =
-                NotificationManagerCompat.from(c);
+       // NotificationManagerCompat notificationManager = NotificationManagerCompat.from(c);
         notificationManager.notify(1, notificationBuilder.build());
     }
 

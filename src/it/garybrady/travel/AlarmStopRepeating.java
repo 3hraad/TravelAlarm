@@ -14,7 +14,7 @@ public class AlarmStopRepeating extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AlarmManagerBroadcastReceiver alarm = new AlarmManagerBroadcastReceiver();
-        //NotificationManager notificationManager = getNotificationManager();
+        NotificationManager notificationManager = getNotificationManager();
 
 
         Context context = this.getApplicationContext();
@@ -23,8 +23,7 @@ public class AlarmStopRepeating extends Activity {
         }else{
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
         }
-        NotificationManagerCompat notificationManager =
-                NotificationManagerCompat.from(this);
+        //NotificationManagerCompat notificationManager =NotificationManagerCompat.from(this);
         notificationManager.cancel(1);
         finish();
     }

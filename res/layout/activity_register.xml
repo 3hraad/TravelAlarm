@@ -51,6 +51,22 @@
             android:layout_marginBottom="20dip"
             android:inputType="textPassword"/>
 
+    <TextView
+            android:id="@+id/tvPassRepeat"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Repeat Password:"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"/>
+
+    <EditText
+            android:id="@+id/txtPasswordRepeat"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:layout_marginBottom="20dip"
+            android:inputType="textPassword"/>
+
     <Button
             android:id="@+id/btnRegister"
             android:layout_width="fill_parent"

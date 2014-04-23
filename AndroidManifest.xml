@@ -250,8 +250,8 @@
                 android:theme="@android:style/Theme.Holo.Dialog"
                 android:screenOrientation="portrait"
                 />
-        <activity android:name=".AlarmTest" android:label="Test Alarm"/>
-
+        <!--<activity android:name=".AlarmTest" android:label="Test Alarm"/>
+-->
         <activity android:name=".AlarmManagerActivity" android:label="Test Alarm"/>
         <activity android:name=".AlarmStopRepeating" android:label="Travel Alarm"/>
         <activity android:name=".AlarmContinueRepeating" android:label="Travel Alarm"/>
@@ -267,7 +267,7 @@
         <service android:name="it.garybrady.travel.ReceiveTransitionsIntentService" android:exported="false"></service>
 
 
-       <!-- <receiver android:name=".WidgetProvider"
+        <!--<receiver android:name=".WidgetProvider"
                   android:label="@string/app_name">
             <intent-filter>
                     <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
@@ -275,6 +275,28 @@
             <meta-data android:name="android.appwidget.provider"
                        android:resource="@xml/widget_info"/>
                   </receiver>-->
+        <!--Widget demo-->
+        <receiver android:name="MyWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/demo_widget_provider" />
+        </receiver>
+        <receiver
+                android:name="MyWidgetIntentReceiver"
+                android:label="widgetBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="it.garybrady.travel.action.CHANGE_PICTURE" />
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/demo_widget_provider" />
+        </receiver>
+        <!--end widget demo-->
 
 
 

@@ -1,6 +1,7 @@
 package it.garybrady.travel;
 
 import android.app.Application;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -41,14 +42,12 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
         //Loop through all widgets to display an update
-        final int N=appWidgetIds.length;
-        SharedPreferences prefs = context.getSharedPreferences("busInfo",0);
-        ref= prefs.getString("busRef","0");
-        for(int i=0;i<N;i++){
-            int appWidgetId=appWidgetIds[i];
-            String titlePrefix="Time since the widget was started";
-            updateAppWidget(context,appWidgetManager,appWidgetId,titlePrefix);
-        }
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        Intent clickIntent = new Intent(context, WidgetProvider.class);
+        clickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, APPWIDGET);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, APPWIDGET, clickIntent, 0);
+        views.setOnClickPendingIntent(R.id.tvBusDest, pendingIntent);
+        appWidgetManager.updateAppWidget(APPWIDGET, views);
     }
 
     @Override
@@ -62,8 +61,9 @@ public class WidgetProvider extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 
+
         SharedPreferences prefs = context.getSharedPreferences("busInfo",0);
-        ref= prefs.getString("busRef","0");
+        ref= prefs.getString("busRef","241831");
         JSONArray jArray = getBusInfo(ref);
 
 

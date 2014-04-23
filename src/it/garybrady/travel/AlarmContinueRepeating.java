@@ -10,11 +10,11 @@ import android.preview.support.v4.app.NotificationManagerCompat;
  * Created by Gary on 17/04/14.
  */
 public class AlarmContinueRepeating extends Activity {
-    //NotificationManager notificationManager = getNotificationManager();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        NotificationManagerCompat notificationManager =
-                NotificationManagerCompat.from(this);
+        NotificationManager notificationManager = getNotificationManager();
+
+//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.cancel(1);
         finish();
     }
