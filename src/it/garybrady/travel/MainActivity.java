@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		StrictMode.enableDefaults();
 		//test = (TextView) findViewById(R.id.testView);
-		Button myMapActivity = (Button) findViewById(R.id.bBusAlarm);
+		/*Button myMapActivity = (Button) findViewById(R.id.bBusAlarm);
 		myMapActivity.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 				Intent i = new Intent(MainActivity.this, MarkerMap.class);
 				startActivity(i);
 			}
-		});
+		});*/
 		//sd = (SlidingDrawer) findViewById(R.id.slidingDrawer1);
 		/*wb = (WebView) findViewById(R.id.webView1);
 		wb.loadUrl("http://www.rtpi.ie/Popup_Content/WebDisplay/WebDisplay.aspx?stopRef=241831");
