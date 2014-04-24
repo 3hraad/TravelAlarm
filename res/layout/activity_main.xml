@@ -32,23 +32,13 @@
             android:layout_height="wrap_content"
             android:text="GPS Alarm" />
 
-<!--    <Button
-            android:id="@+id/bViewGeofence"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View Current Geofences" />
 
-    <Button
-            android:id="@+id/bViewprevGeo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View Previous Geofences" />-->
 
     <Button
             android:id="@+id/bViewAllGeo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View Geofences" />
+            android:text="View Geofence Alarms" />
 
 
     <!--<Button
@@ -61,7 +51,7 @@
             android:id="@+id/bGCMreg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="GCM register" />
+            android:text="Register for Chrome Extension" />
 
     <!--<Button
             android:id="@+id/bAlarmTest"

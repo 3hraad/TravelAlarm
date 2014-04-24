@@ -246,7 +246,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DialogCheckBusAlarm"
-                  android:label="DialogCheckBusAlarm"
+                  android:label="Bus Alarm"
                 android:theme="@android:style/Theme.Holo.Dialog"
                 android:screenOrientation="portrait"
                 />
@@ -289,7 +289,7 @@
                 android:name="MyWidgetIntentReceiver"
                 android:label="widgetBroadcastReceiver" >
             <intent-filter>
-                <action android:name="it.garybrady.travel.action.CHANGE_PICTURE" />
+                <action android:name="it.garybrady.travel.action.WIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data

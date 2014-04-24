@@ -23,7 +23,7 @@ public class MyWidgetProvider extends AppWidgetProvider {
 
 	public static PendingIntent buildButtonPendingIntent(Context context) {
 		Intent intent = new Intent();
-	    intent.setAction("it.garybrady.travel.action.CHANGE_PICTURE");
+	    intent.setAction("it.garybrady.travel.action.WIDGET_UPDATE");
 	    return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 	}
 

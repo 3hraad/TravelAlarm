@@ -39,7 +39,7 @@ public class MyWidgetIntentReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if(intent.getAction().equals("it.garybrady.travel.action.CHANGE_PICTURE")){
+        if(intent.getAction().equals("it.garybrady.travel.action.WIDGET_UPDATE")){
             updateWidgetPictureAndButtonListener(context);
         }
     }
@@ -53,6 +53,7 @@ public class MyWidgetIntentReceiver extends BroadcastReceiver {
         // Check if Internet present
         if (!cd.isConnectingToInternet()) {
 
+            clearRemoteView();
             remoteViews.setTextViewText(R.id.tvBusDest,"No Internet Connection");
             remoteViews.setOnClickPendingIntent(R.id.widget_button, MyWidgetProvider.buildButtonPendingIntent(context));
             MyWidgetProvider.pushWidgetUpdate(context.getApplicationContext(), remoteViews);
@@ -87,16 +88,14 @@ public class MyWidgetIntentReceiver extends BroadcastReceiver {
 
     }
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-    private int getImageToSet() {
-        clickCount++;
-        return clickCount % 2 == 0 ? R.drawable.ic_launcher : R.drawable.img_notification_done;
+    private void clearRemoteView() {
+        remoteViews.setTextViewText(R.id.tvBusDest,"");
+        remoteViews.setTextViewText(R.id.tvLastUpdated,"");
+        remoteViews.setTextViewText(R.id.tvBusNo,"");
+        remoteViews.setTextViewText(R.id.tvBusETA,"");
+        remoteViews.setTextViewText(R.id.tvBusNo1,"");
+        remoteViews.setTextViewText(R.id.tvBusDest1,"");
+        remoteViews.setTextViewText(R.id.tvBusETA1,"");
     }
 
 
@@ -104,7 +103,6 @@ public class MyWidgetIntentReceiver extends BroadcastReceiver {
 
         String webStopRef="http://192.3.177.209/liveInfo.php?RefNo=";
         String refURL;
-        boolean success;
         public loadBusTimeInfo() {
             super();
             //ref = stopReference;
@@ -137,7 +135,6 @@ public class MyWidgetIntentReceiver extends BroadcastReceiver {
                 isr = entity.getContent();
             }
             catch(Exception e){
-                success=false;
                 Log.e("log_tag", "Error in http connection " + e.toString());
 
             }
@@ -154,7 +151,6 @@ public class MyWidgetIntentReceiver extends BroadcastReceiver {
                 result=sb.toString();
             }
             catch(Exception e){
-                success=false;
                 Log.e("log_tag", "Error  converting result "+e.toString());
             }
 
@@ -169,9 +165,7 @@ public class MyWidgetIntentReceiver extends BroadcastReceiver {
                     destination[i]=json.getString("dest");
                     eta[i] =json.getString("time");
                 }
-                success=true;
             } catch (Exception e) {
-                success=false;
 
                 Log.e("log_tag", "Error Parsing Data "+e.toString());
             }
@@ -185,11 +179,7 @@ public class MyWidgetIntentReceiver extends BroadcastReceiver {
             //remoteViews.setImageViewResource(R.id.widget_image, getImageToSet());
             String date = "Last Updated :" + (DateFormat.format("dd-MM-yyyy hh:mm", new java.util.Date()).toString());
 
-            Log.e("CMON", refURL);
-            Log.e("CMON", busNo[0]);
-            Log.e("CMON", destination[0]);
-            Log.e("CMON", eta[0]);
-            if(success==true){
+            if (busNo!=null){
                 remoteViews.setTextViewText(R.id.tvLastUpdated, date);
                 remoteViews.setTextViewText(R.id.tvBusNo,busNo[0]);
                 remoteViews.setTextViewText(R.id.tvBusDest,destination[0]);
@@ -198,8 +188,9 @@ public class MyWidgetIntentReceiver extends BroadcastReceiver {
                 remoteViews.setTextViewText(R.id.tvBusDest1,destination[1]);
                 remoteViews.setTextViewText(R.id.tvBusETA1,eta[1]);
             }else{
-                /*remoteViews.setTextViewText(R.id.tvBusDest,"Please select a bus");
-                remoteViews.setTextViewText(R.id.tvBusDest1,"within Travel Alarm"); */
+                clearRemoteView();
+                remoteViews.setTextViewText(R.id.tvBusNo,"No Information Available");
+
             }
 
 

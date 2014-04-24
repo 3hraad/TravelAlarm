@@ -172,6 +172,8 @@ public class MarkerMap extends FragmentActivity implements
                     Toast.makeText(getApplication(),"No Bus Selected",Toast.LENGTH_LONG).show();
                 }else{
                 savePreferences("busRef",selectedBus);
+                    Toast.makeText(getApplication(),"Tap Widget to Update Information",Toast.LENGTH_LONG).show();
+
                 }
             }
         });
