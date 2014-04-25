@@ -9,6 +9,8 @@
             android:id="@+id/tvBusNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:singleLine="true"
             android:text="   "
             android:textColor="#ff000000"
             android:background="#ffffffff"
@@ -16,23 +18,29 @@
     <TextView
             android:textSize="22dp"
             android:id="@+id/tvBusDest"
-            android:layout_width="wrap_content"
+
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:text="Tap to update "
             android:textColor="#ff000000"
             android:background="#ffffffff"
-            android:layout_marginLeft="12dp" android:layout_below="@+id/tvLastUpdated"
+            android:layout_marginLeft="5dp" android:layout_below="@+id/tvLastUpdated"
             android:layout_toRightOf="@+id/tvBusNo"
             android:ellipsize="end"/>
     <TextView
             android:id="@+id/tvBusETA"
             android:textSize="22dp"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
+
+            android:singleLine="true"
             android:text=""
             android:textColor="#ff000000"
             android:background="#ffffffff"
-            android:gravity="right" android:layout_above="@+id/tvBusDest1" android:layout_toRightOf="@+id/tvBusDest"
+            android:gravity="right"
+            android:layout_above="@+id/tvBusDest1"
+            android:layout_toRightOf="@+id/tvBusDest"
             android:layout_alignParentRight="true"/>
 
 
@@ -41,6 +49,7 @@
             android:textSize="22dp"
             android:id="@+id/tvBusNo1"
             android:layout_width="wrap_content"
+            android:singleLine="true"
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="#ff000000"
@@ -49,12 +58,14 @@
     <TextView
             android:textSize="22dp"
             android:id="@+id/tvBusDest1"
-            android:layout_width="wrap_content"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:text=""
             android:textColor="#ff000000"
             android:background="#ffffffff"
-            android:layout_alignBaseline="@+id/tvBusNo1" android:layout_alignBottom="@+id/tvBusNo1"
+            android:layout_alignBaseline="@+id/tvBusNo1"
+            android:layout_alignBottom="@+id/tvBusNo1"
             android:layout_alignLeft="@+id/tvBusDest"
             android:ellipsize="end"/>
     <TextView
@@ -62,17 +73,20 @@
             android:textSize="22dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:text=""
             android:textColor="#ff000000"
             android:background="#ffffffff"
-            android:gravity="right" android:layout_below="@+id/tvBusETA" android:layout_alignParentRight="true"
+            android:gravity="right" android:layout_below="@+id/tvBusETA"
+            android:layout_alignParentRight="true"
             android:layout_toRightOf="@+id/tvBusDest1"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             android:id="@+id/tvLastUpdated"
-            android:layout_alignParentTop="true" android:layout_alignParentLeft="true"/>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"/>
     <Button
             android:id="@+id/widget_button"
             android:layout_width="match_parent"
