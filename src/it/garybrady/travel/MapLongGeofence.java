@@ -337,25 +337,30 @@ public class MapLongGeofence extends FragmentActivity implements
 
     public void geoLocate(View v) throws IOException {
         if (isNetworkAvailable()){
-        et = (EditText) findViewById(R.id.etLongGeoLocate);
-        String location = searchedLocation.getText().toString();
-        if (location.length() == 0) {
-            Toast.makeText(this, "Please enter a location", Toast.LENGTH_SHORT).show();
-            return;
-        }
+            et = (EditText) findViewById(R.id.etLongGeoLocate);
+            String location = searchedLocation.getText().toString();
+            if (location.length() == 0) {
+                Toast.makeText(this, "Please enter a location", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        hideSoftKeyboard(v);
+            hideSoftKeyboard(v);
 
-        Geocoder gc = new Geocoder(this);
-        List<Address> list = gc.getFromLocationName(location, 1);
-        Address add = list.get(0);
-        String locality = add.getLocality();
-        Toast.makeText(this, locality, Toast.LENGTH_LONG).show();
+            Geocoder gc = new Geocoder(this);
+            try {
+                List<Address> list = gc.getFromLocationName(location, 1);
+                Address add = list.get(0);
+                String locality = add.getLocality();
+                Toast.makeText(this, locality, Toast.LENGTH_LONG).show();
 
-        double lat = add.getLatitude();
-        double lng = add.getLongitude();
+                double lat = add.getLatitude();
+                double lng = add.getLongitude();
 
-        gotoLocation(lat, lng, DEFAULTZOOM);
+                gotoLocation(lat, lng, DEFAULTZOOM);
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),"Address cannot be found",Toast.LENGTH_LONG).show();
+
+            }
         }else{
             Toast.makeText(getApplicationContext(),"Cannot connect, please check internet connection",Toast.LENGTH_LONG).show();
         }

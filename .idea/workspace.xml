@@ -20,11 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6496c776-eff0-4f84-9256-490b51f07528" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/CustomList.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/list_single.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/MainActivity.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/MyActivity.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/MyActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/res/layout/activity_main.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/list_view_header_current.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/BestBusMap.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/BestBusMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/GCMmap.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/GCMmap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/GeofenceConstruct.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/GeofenceConstruct.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/GeofenceCurrent.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/GeofenceCurrent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/GeofencePrevious.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/GeofencePrevious.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/MapLongGeofence.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/MapLongGeofence.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/MarkerMap.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/MarkerMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/it/garybrady/travel/RegisterActivity.java" afterPath="$PROJECT_DIR$/src/it/garybrady/travel/RegisterActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_confirm_geofence.xml" afterPath="$PROJECT_DIR$/res/layout/activity_confirm_geofence.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_register.xml" afterPath="$PROJECT_DIR$/res/layout/activity_register.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/xml/demo_widget_provider.xml" afterPath="$PROJECT_DIR$/res/xml/demo_widget_provider.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_view_header.xml" afterPath="$PROJECT_DIR$/res/layout/list_view_header.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Travel Alarm.iws" />
@@ -135,7 +144,83 @@
     <favorites_list name="Travel Alarm" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="49" selection-start="1416" selection-end="1416" vertical-scroll-proportion="0.0" vertical-offset="2074" max-vertical-offset="5440">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BestBusMap.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/BestBusMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="293" column="79" selection-start="10343" selection-end="10343" vertical-scroll-proportion="0.8211091" vertical-offset="3366" max-vertical-offset="9826">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="widget_info.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/xml/widget_info.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="20" selection-start="138" selection-end="207" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_register.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/activity_register.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="63" selection-start="493" selection-end="493" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1394">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_confirm_geofence.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/activity_confirm_geofence.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="120" column="43" selection-start="5691" selection-end="5691" vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="2516">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list_view_header.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/list_view_header.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="48" selection-start="311" selection-end="311" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="374">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list_view_header_current.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/list_view_header_current.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="52" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="374">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -148,25 +233,16 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/it/garybrady/travel/ViewGeofences.java" />
-        <option value="$PROJECT_DIR$/res/layout/activity_view_all_geos.xml" />
         <option value="$PROJECT_DIR$/res/layout/list_previous_geo.xml" />
         <option value="$PROJECT_DIR$/res/layout/list_current_geo.xml" />
-        <option value="$PROJECT_DIR$/src/it/garybrady/travel/GeofenceConstruct.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/TriggeredGeofence.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/ServerUtilities.java" />
         <option value="$PROJECT_DIR$/res/layout/activity_gcm_act.xml" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/ReceiveTransitionsIntentService.java" />
         <option value="$PROJECT_DIR$/res/layout/activity_map.xml" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/MyReciever.java" />
-        <option value="$PROJECT_DIR$/src/it/garybrady/travel/MapLongGeofence.java" />
-        <option value="$PROJECT_DIR$/res/layout/list_view_header.xml" />
-        <option value="$PROJECT_DIR$/src/it/garybrady/travel/GeofenceCurrent.java" />
-        <option value="$PROJECT_DIR$/src/it/garybrady/travel/GeofencePrevious.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/ViewBothGeofences.java" />
-        <option value="$PROJECT_DIR$/src/it/garybrady/travel/BestBusMap.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/GcmActivity.java" />
-        <option value="$PROJECT_DIR$/src/it/garybrady/travel/GCMmap.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/MyAlarmService.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/MyReceiver.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/Alarm.java" />
@@ -179,8 +255,6 @@
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/AlarmmStopRepeating.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/GCMIntentService.java" />
         <option value="$PROJECT_DIR$/res/layout/dialog_check_bus_alarm.xml" />
-        <option value="$PROJECT_DIR$/res/layout/activity_register.xml" />
-        <option value="$PROJECT_DIR$/src/it/garybrady/travel/RegisterActivity.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/AlarmManagerActivity.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/AlarmManagerBroadcastReceiver.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/AlarmStopRepeating.java" />
@@ -190,15 +264,26 @@
         <option value="$PROJECT_DIR$/res/layout/widget_layout.xml" />
         <option value="$PROJECT_DIR$/res/menu/main.xml" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/MyWidgetProvider.java" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/it/garybrady/travel/MarkerMap.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/MyWidgetIntentReceiver.java" />
-        <option value="$PROJECT_DIR$/res/xml/demo_widget_provider.xml" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/CustomList.java" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/MainActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/res/layout/list_single.xml" />
         <option value="$PROJECT_DIR$/src/it/garybrady/travel/MyActivity.java" />
+        <option value="$PROJECT_DIR$/src/it/garybrady/travel/GeofencePrevious.java" />
+        <option value="$PROJECT_DIR$/res/layout/list_view_header_current.xml" />
+        <option value="$PROJECT_DIR$/res/layout/list_view_header.xml" />
+        <option value="$PROJECT_DIR$/src/it/garybrady/travel/GeofenceCurrent.java" />
+        <option value="$PROJECT_DIR$/res/layout/activity_confirm_geofence.xml" />
+        <option value="$PROJECT_DIR$/src/it/garybrady/travel/GeofenceConstruct.java" />
+        <option value="$PROJECT_DIR$/res/layout/activity_register.xml" />
+        <option value="$PROJECT_DIR$/src/it/garybrady/travel/RegisterActivity.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/it/garybrady/travel/MarkerMap.java" />
+        <option value="$PROJECT_DIR$/src/it/garybrady/travel/MapLongGeofence.java" />
+        <option value="$PROJECT_DIR$/src/it/garybrady/travel/GCMmap.java" />
+        <option value="$PROJECT_DIR$/src/it/garybrady/travel/BestBusMap.java" />
+        <option value="$PROJECT_DIR$/res/xml/demo_widget_provider.xml" />
       </list>
     </option>
   </component>
@@ -234,7 +319,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -345,6 +429,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -364,7 +449,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="TA92908S6I" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="4790723de62210f6" />
     <property name="FullScreen" value="false" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
@@ -380,8 +465,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="X:\Intellij Android\TravelAlarm\res\xml" />
       <recent name="X:\Intellij Android\TravelAlarm\res\layout" />
+      <recent name="X:\Intellij Android\TravelAlarm\res\xml" />
       <recent name="X:\Intellij Android\TravelAlarm\src\it\garybrady\travel" />
       <recent name="X:\Intellij Android\TravelAlarm\res" />
       <recent name="X:\Intellij Android\TravelAlarm\res\drawable-xhdpi" />
@@ -534,12 +619,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2841797" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -549,12 +633,13 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32471728" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37318256" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48626816" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2489019" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2489019" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3231018" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2841797" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3279483" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329429" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout>
@@ -592,30 +677,13 @@
     <MESSAGE value="Bus Alarm working with Android wear" />
     <MESSAGE value="Widget Working, needs prettying up" />
     <MESSAGE value="Widget bug fixes&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Widget bug fixes&#10;" />
+    <MESSAGE value="List view main menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="List view main menu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/CommonUtilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="24" selection-start="242" selection-end="242" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/ServerUtilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="39" selection-start="1353" selection-end="1353" vertical-scroll-proportion="0.0" vertical-offset="2046" max-vertical-offset="2618" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_gcm_act.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="49" selection-start="1433" selection-end="1433" vertical-scroll-proportion="0.6215722" vertical-offset="255" max-vertical-offset="1003" />
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/ViewPreviousGeo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="19" selection-start="402" selection-end="402" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1870" />
@@ -632,11 +700,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_map.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="64" selection-start="3145" selection-end="3145" vertical-scroll-proportion="-46.2" vertical-offset="460" max-vertical-offset="2431" />
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="64" selection-start="3145" selection-end="3145" vertical-scroll-proportion="-46.2" vertical-offset="460" max-vertical-offset="2431" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/GPSAlarm.java">
@@ -644,27 +712,9 @@
         <state line="8" column="13" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/list_view_header.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="34" selection-start="636" selection-end="636" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="374" />
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/GeofenceCurrent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="8" selection-start="1374" selection-end="1396" vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1241" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/ViewBothGeofences.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="24" selection-start="1213" selection-end="1213" vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="765" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/GeofencePrevious.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="0" selection-start="1639" selection-end="1639" vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="1479" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/android-studio/sdk/extras/google/gcm/samples/gcm-demo-client/libs/gcm.jar!/com/google/android/gcm/GCMRegistrar.class">
@@ -672,27 +722,17 @@
         <state line="53" column="46" selection-start="2978" selection-end="2978" vertical-scroll-proportion="0.3483146" vertical-offset="698" max-vertical-offset="1275" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/BestBusMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="177" column="17" selection-start="6290" selection-end="6290" vertical-scroll-proportion="0.0" vertical-offset="3009" max-vertical-offset="9724" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/LongGeofence.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="58" column="13" selection-start="2122" selection-end="2122" vertical-scroll-proportion="-1.4333895" vertical-offset="1071" max-vertical-offset="15266" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/MapLongGeofence.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="374" column="9" selection-start="11716" selection-end="12895" vertical-scroll-proportion="0.0" vertical-offset="1549" max-vertical-offset="3604" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_map_long_geofence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="37" selection-start="1765" selection-end="1765" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1581" />
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="37" selection-start="1765" selection-end="1765" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1581" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/DialogCheckBusAlarm.java">
@@ -701,11 +741,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/alarm_test.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="14" selection-start="1124" selection-end="1124" vertical-scroll-proportion="0.5904936" vertical-offset="0" max-vertical-offset="547" />
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="14" selection-start="1124" selection-end="1124" vertical-scroll-proportion="0.5904936" vertical-offset="0" max-vertical-offset="547" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/traveldata/constants.java">
@@ -723,66 +763,29 @@
         <state line="272" column="18" selection-start="8191" selection-end="8191" vertical-scroll-proportion="0.0" vertical-offset="4032" max-vertical-offset="4658" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/GCMmap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="0" selection-start="2489" selection-end="2489" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="7310">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/ReceiveTransitionsIntentService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="164" column="52" selection-start="6008" selection-end="6008" vertical-scroll-proportion="1.7132868" vertical-offset="1434" max-vertical-offset="3332">
-          <folding />
-        </state>
+        <state line="164" column="52" selection-start="6008" selection-end="6008" vertical-scroll-proportion="1.7132868" vertical-offset="1434" max-vertical-offset="3332" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/GCMIntentService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="60" selection-start="4045" selection-end="4045" vertical-scroll-proportion="0.0" vertical-offset="1417" max-vertical-offset="2193">
-          <folding />
-        </state>
+        <state line="117" column="60" selection-start="4045" selection-end="4045" vertical-scroll-proportion="0.0" vertical-offset="1417" max-vertical-offset="2193" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/dialog_check_bus_alarm.xml">
-      <provider editor-type-id="text-editor">
-        <state line="36" column="4" selection-start="1762" selection-end="2179" vertical-scroll-proportion="0.0" vertical-offset="303" max-vertical-offset="1105">
-          <folding />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_register.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="33" selection-start="2163" selection-end="2163" vertical-scroll-proportion="-38.76" vertical-offset="0" max-vertical-offset="1394">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/RegisterActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="16" selection-start="5341" selection-end="5341" vertical-scroll-proportion="0.59484345" vertical-offset="1683" max-vertical-offset="4539">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/TriggeredGeofence.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1195" selection-end="1195" vertical-scroll-proportion="0.0" vertical-offset="328" max-vertical-offset="1581">
+      <provider editor-type-id="text-editor">
+        <state line="36" column="4" selection-start="1762" selection-end="2179" vertical-scroll-proportion="0.0" vertical-offset="303" max-vertical-offset="1105">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/AlarmManagerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="8" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1292">
-          <folding />
-        </state>
+        <state line="29" column="8" selection-start="731" selection-end="731" vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1292" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/AlarmManagerBroadcastReceiver.java">
@@ -794,16 +797,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/AlarmStopRepeating.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="8" selection-start="973" selection-end="973" vertical-scroll-proportion="0.0" vertical-offset="141" max-vertical-offset="578">
-          <folding />
-        </state>
+        <state line="27" column="8" selection-start="973" selection-end="973" vertical-scroll-proportion="0.0" vertical-offset="141" max-vertical-offset="578" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/AlarmContinueRepeating.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="102" selection-start="492" selection-end="492" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-          <folding />
-        </state>
+        <state line="15" column="102" selection-start="492" selection-end="492" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442" />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/android-studio/sdk/sources/android-19/android/appwidget/AppWidgetManager.java">
@@ -812,18 +811,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/widget_demo.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="4" selection-start="552" selection-end="765" vertical-scroll-proportion="-10.88" vertical-offset="0" max-vertical-offset="510">
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/xml/widget_info.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="20" selection-start="138" selection-end="207" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
+        <state line="16" column="4" selection-start="552" selection-end="765" vertical-scroll-proportion="-10.88" vertical-offset="0" max-vertical-offset="510">
           <folding />
         </state>
       </provider>
@@ -837,23 +829,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/menu/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="43" selection-start="201" selection-end="201" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/MarkerMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="174" column="85" selection-start="6177" selection-end="6177" vertical-scroll-proportion="0.0" vertical-offset="1527" max-vertical-offset="9673">
-          <folding />
-        </state>
+        <state line="5" column="43" selection-start="201" selection-end="201" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/MyWidgetProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="66" selection-start="865" selection-end="865" vertical-scroll-proportion="0.0" vertical-offset="74" max-vertical-offset="697">
-          <folding />
-        </state>
+        <state line="25" column="66" selection-start="865" selection-end="865" vertical-scroll-proportion="0.0" vertical-offset="74" max-vertical-offset="697" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/MyWidgetIntentReceiver.java">
@@ -863,35 +844,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/xml/demo_widget_provider.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="48" selection-start="167" selection-end="167" vertical-scroll-proportion="0.09970675" vertical-offset="0" max-vertical-offset="341">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/widget_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="81" column="12" selection-start="3484" selection-end="3484" vertical-scroll-proportion="0.4620253" vertical-offset="1231" max-vertical-offset="1547">
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/GcmActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="8" selection-start="1576" selection-end="1711" vertical-scroll-proportion="-1.1740332" vertical-offset="918" max-vertical-offset="3655">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="248" column="42" selection-start="9979" selection-end="9979" vertical-scroll-proportion="1.0911602" vertical-offset="3821" max-vertical-offset="5440">
-          <folding />
-        </state>
+        <state line="54" column="8" selection-start="1576" selection-end="1711" vertical-scroll-proportion="-1.1740332" vertical-offset="918" max-vertical-offset="3655" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/MainActivity.java">
@@ -903,48 +868,163 @@
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/android-studio/sdk/sources/android-19/android/graphics/Color.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="43" selection-start="1511" selection-end="1520" vertical-scroll-proportion="0.19579288" vertical-offset="202" max-vertical-offset="6987">
-          <folding />
-        </state>
+        <state line="37" column="43" selection-start="1511" selection-end="1520" vertical-scroll-proportion="0.19579288" vertical-offset="202" max-vertical-offset="6987" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/CustomList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="37" selection-start="1165" selection-end="1165" vertical-scroll-proportion="0.0" vertical-offset="2" max-vertical-offset="680">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="30" column="37" selection-start="1165" selection-end="1165" vertical-scroll-proportion="0.0" vertical-offset="2" max-vertical-offset="680" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_single.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="36" selection-start="269" selection-end="269" vertical-scroll-proportion="-4.76" vertical-offset="0" max-vertical-offset="459">
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/MyActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="44" selection-start="2427" selection-end="2427" vertical-scroll-proportion="0.7133221" vertical-offset="699" max-vertical-offset="4420">
-          <folding>
-            <element signature="e#1359#2711#0" expanded="true" />
-            <element signature="e#2700#2701#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="33" selection-start="471" selection-end="471" vertical-scroll-proportion="0.29929578" vertical-offset="0" max-vertical-offset="568">
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/MyActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="44" selection-start="2427" selection-end="2427" vertical-scroll-proportion="0.7133221" vertical-offset="648" max-vertical-offset="4352">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/TriggeredGeofence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="4" selection-start="2356" selection-end="2498" vertical-scroll-proportion="0.0" vertical-offset="889" max-vertical-offset="1581">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_view_header.xml">
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="48" selection-start="311" selection-end="311" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="374">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/list_view_header_current.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="52" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="374">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_confirm_geofence.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="43" selection-start="5691" selection-end="5691" vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="2516">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_register.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="63" selection-start="493" selection-end="493" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1394">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/RegisterActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="218" column="13" selection-start="7568" selection-end="7568" vertical-scroll-proportion="0.0" vertical-offset="2908" max-vertical-offset="4590">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/GeofencePrevious.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="23" selection-start="711" selection-end="779" vertical-scroll-proportion="-0.23776224" vertical-offset="459" max-vertical-offset="1496">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/GeofenceCurrent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="39" selection-start="928" selection-end="928" vertical-scroll-proportion="-0.2972028" vertical-offset="544" max-vertical-offset="1938">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/GeofenceConstruct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="239" column="77" selection-start="8829" selection-end="8829" vertical-scroll-proportion="-1.3671329" vertical-offset="4063" max-vertical-offset="14569">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="49" selection-start="1416" selection-end="1416" vertical-scroll-proportion="0.0" vertical-offset="2074" max-vertical-offset="5440">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/MarkerMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="301" column="79" selection-start="10366" selection-end="10366" vertical-scroll-proportion="0.72202796" vertical-offset="3497" max-vertical-offset="9724">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/MapLongGeofence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="360" column="79" selection-start="12716" selection-end="12716" vertical-scroll-proportion="0.1252236" vertical-offset="5030" max-vertical-offset="6919">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/GCMmap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="340" column="79" selection-start="11746" selection-end="11746" vertical-scroll-proportion="0.45259392" vertical-offset="4439" max-vertical-offset="7378">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/widget_info.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="20" selection-start="138" selection-end="207" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/demo_widget_provider.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="25" selection-start="223" selection-end="223" vertical-scroll-proportion="0.2509225" vertical-offset="0" max-vertical-offset="271">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/it/garybrady/travel/BestBusMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="293" column="79" selection-start="10343" selection-end="10343" vertical-scroll-proportion="0.8211091" vertical-offset="3366" max-vertical-offset="9826">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>

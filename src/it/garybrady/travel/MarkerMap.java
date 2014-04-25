@@ -140,7 +140,7 @@ public class MarkerMap extends FragmentActivity implements
                 realBusTimeInfo = new ArrayList<String>();
                 //getBusInfo(clickedMarker.getTitle());
                 selectedBus =clickedMarker.getTitle();
-               // new MyAsyncTask(true).execute(maybe_other_params);
+                // new MyAsyncTask(true).execute(maybe_other_params);
                 new loadBusTimeInfo(clickedMarker.getTitle()).execute();
 
                 return false;
@@ -148,7 +148,7 @@ public class MarkerMap extends FragmentActivity implements
         });
 
 
-       refresh =(ImageView) findViewById(R.id.ivReload);
+        refresh =(ImageView) findViewById(R.id.ivReload);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,8 +156,8 @@ public class MarkerMap extends FragmentActivity implements
                     Toast.makeText(getApplication(),"No bus stop selected",Toast.LENGTH_LONG).show();
                 }else{
                     sd.open();
-                realBusTimeInfo = new ArrayList<String>();
-                new loadBusTimeInfo(selectedBus).execute();
+                    realBusTimeInfo = new ArrayList<String>();
+                    new loadBusTimeInfo(selectedBus).execute();
                 }
 
             }
@@ -171,7 +171,7 @@ public class MarkerMap extends FragmentActivity implements
                 if(selectedBus==null){
                     Toast.makeText(getApplication(),"No Bus Selected",Toast.LENGTH_LONG).show();
                 }else{
-                savePreferences("busRef",selectedBus);
+                    savePreferences("busRef",selectedBus);
                     Toast.makeText(getApplication(),"Tap Widget to Update Information",Toast.LENGTH_LONG).show();
 
                 }
@@ -277,25 +277,31 @@ public class MarkerMap extends FragmentActivity implements
 
     public void geoLocate(View v) throws IOException {
         if (isNetworkAvailable()) {
-        et = (EditText) findViewById(R.id.etLongGeoLocate);
-        String location = et.getText().toString();
-        if (location.length() == 0) {
-            Toast.makeText(this, "Please enter a location", Toast.LENGTH_SHORT).show();
-            return;
-        }
+            et = (EditText) findViewById(R.id.etLongGeoLocate);
+            String location = et.getText().toString();
+            if (location.length() == 0) {
+                Toast.makeText(this, "Please enter a location", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        hideSoftKeyboard(v);
+            hideSoftKeyboard(v);
 
-        Geocoder gc = new Geocoder(this);
-        List<Address> list = gc.getFromLocationName(location, 1);
-        Address add = list.get(0);
-        String locality = add.getLocality();
-        Toast.makeText(this, locality, Toast.LENGTH_LONG).show();
+            Geocoder gc = new Geocoder(this);
+            try{
+            List<Address> list = gc.getFromLocationName(location, 1);
 
-        double lat = add.getLatitude();
-        double lng = add.getLongitude();
+                Address add = list.get(0);
+                String locality = add.getLocality();
+                Toast.makeText(this, locality, Toast.LENGTH_LONG).show();
 
-        gotoLocation(lat, lng, DEFAULTZOOM);
+                double lat = add.getLatitude();
+                double lng = add.getLongitude();
+
+                gotoLocation(lat, lng, DEFAULTZOOM);
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),"Address cannot be found",Toast.LENGTH_LONG).show();
+
+            }
         }else{
             Toast.makeText(getApplicationContext(),"Cannot connect, please check internet connection",Toast.LENGTH_LONG).show();
         }

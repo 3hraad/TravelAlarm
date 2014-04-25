@@ -237,7 +237,7 @@ public class GeofenceConstruct extends FragmentActivity {
                             // Restart the process of adding the current geofences
                             mGeofenceRequester.addGeofences(mCurrentGeofences);
 
-                            Toast.makeText(getApplicationContext(),"Geofence Created",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Alarm Set",Toast.LENGTH_LONG).show();
                             startActivity(new Intent(GeofenceConstruct.this, MyActivity.class));
                             finish();
 

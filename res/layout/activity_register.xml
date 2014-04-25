@@ -8,7 +8,7 @@
             android:id="@+id/tvName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Username (min 6 characters):"
+            android:text="Username (min 6 characters, no spaces):"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
             android:layout_marginTop="20dip"/>

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="it.garybrady.travel"
           android:versionCode="1"
-          android:versionName="Travel Alarm 1.4">
+          android:versionName="Travel Alarm 1.5">
     <uses-sdk
             android:minSdkVersion="16"
             android:targetSdkVersion="17" />
@@ -91,7 +91,7 @@
 
         <activity
                 android:name="it.garybrady.travel.MyActivity"
-                android:label="Travel Alarm v1.4"
+                android:label="Travel Alarm v1.5"
                 android:screenOrientation="portrait"
 
                 >

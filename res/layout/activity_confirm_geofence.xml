@@ -118,7 +118,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="60dp"
-                    android:text="@string/register_geofence"
+                    android:text="Set Alarm"
                     android:layout_alignTop="@+id/label_radius_1"
                     android:onClick="onRegisterClicked" android:layout_alignParentRight="true"
                     android:layout_alignParentLeft="true"/>

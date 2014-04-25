@@ -128,11 +128,11 @@ public class BestBusMap extends FragmentActivity implements
                     Toast.makeText(getApplicationContext(),"Long click to drag pin or to create a new Destination",Toast.LENGTH_LONG).show();
 
                 } else{
-                busInfoList = (ListView) findViewById(R.id.listViewBusTimes);
-                realBusTimeInfo = new ArrayList<String>();
-                //getBusInfo(clickedMarker.getTitle());
-                selectedBus =clickedMarker.getTitle();
-                new loadBusTimeInfo(clickedMarker.getTitle()).execute();
+                    busInfoList = (ListView) findViewById(R.id.listViewBusTimes);
+                    realBusTimeInfo = new ArrayList<String>();
+                    //getBusInfo(clickedMarker.getTitle());
+                    selectedBus =clickedMarker.getTitle();
+                    new loadBusTimeInfo(clickedMarker.getTitle()).execute();
                 }
                 return false;
             }
@@ -159,20 +159,20 @@ public class BestBusMap extends FragmentActivity implements
             @Override
             public void onMapLongClick(LatLng latLng) {
                 if(isNetworkAvailable()){
-                if (destination!=null)
-                {
-                    mDestination.remove();
-                    mArrive.remove();
-                }
-                MarkerOptions options = new MarkerOptions()
-                        .position(latLng)
-                        .title("Destination")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                mDestination = mMap.addMarker(options);
-                mDestination.setDraggable(true);
+                    if (destination!=null)
+                    {
+                        mDestination.remove();
+                        mArrive.remove();
+                    }
+                    MarkerOptions options = new MarkerOptions()
+                            .position(latLng)
+                            .title("Destination")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    mDestination = mMap.addMarker(options);
+                    mDestination.setDraggable(true);
 
-                destination=latLng;
-                plotMarkers("arrive");
+                    destination=latLng;
+                    plotMarkers("arrive");
                 } else{
                     Toast.makeText(getApplicationContext(),"Cannot connect, please check internet connection",Toast.LENGTH_LONG).show();
                 }
@@ -202,17 +202,17 @@ public class BestBusMap extends FragmentActivity implements
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-               if (marker.getTitle().equals("Closest Stop to Destination")){
-                   Bundle b = new Bundle();
-                   b.putString("title", "Bus "+receivedBus);
-                   b.putDouble("lat", marker.getPosition().latitude);
-                   b.putDouble("lng", marker.getPosition().longitude);
-                   b.putDouble("radius", 75);
-                   Intent i = new Intent(BestBusMap.this,GeofenceConstruct.class);
-                   i.putExtras(b);
-                   startActivity(i);
-                   finish();
-               }
+                if (marker.getTitle().equals("Closest Stop to Destination")){
+                    Bundle b = new Bundle();
+                    b.putString("title", "Bus "+receivedBus);
+                    b.putDouble("lat", marker.getPosition().latitude);
+                    b.putDouble("lng", marker.getPosition().longitude);
+                    b.putDouble("radius", 75);
+                    Intent i = new Intent(BestBusMap.this,GeofenceConstruct.class);
+                    i.putExtras(b);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 
@@ -269,28 +269,34 @@ public class BestBusMap extends FragmentActivity implements
 
     public void geoLocate(View v) throws IOException {
         if (isNetworkAvailable()){
-        et = (EditText) findViewById(R.id.etLongGeoLocate);
-        String location = et.getText().toString();
-        if (location.length() == 0) {
-            Toast.makeText(this, "Please enter a location", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        hideSoftKeyboard(v);
-
-        Geocoder gc = new Geocoder(this);
-        List<Address> list = gc.getFromLocationName(location, 1);
-        Address add = list.get(0);
-        String locality = add.getLocality();
-        Toast.makeText(this, locality, Toast.LENGTH_LONG).show();
-
-        double lat = add.getLatitude();
-        double lng = add.getLongitude();
-
-        gotoLocation(lat, lng, DEFAULTZOOM);
-        }  else{
-                Toast.makeText(getApplicationContext(),"Cannot connect, please check internet connection",Toast.LENGTH_LONG).show();
+            et = (EditText) findViewById(R.id.etLongGeoLocate);
+            String location = et.getText().toString();
+            if (location.length() == 0) {
+                Toast.makeText(this, "Please enter a location", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            hideSoftKeyboard(v);
+
+            Geocoder gc = new Geocoder(this);
+            try{
+                List<Address> list = gc.getFromLocationName(location, 1);
+
+                Address add = list.get(0);
+                String locality = add.getLocality();
+                Toast.makeText(this, locality, Toast.LENGTH_LONG).show();
+
+                double lat = add.getLatitude();
+                double lng = add.getLongitude();
+
+                gotoLocation(lat, lng, DEFAULTZOOM);
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),"Address cannot be found",Toast.LENGTH_LONG).show();
+
+            }
+        }  else{
+            Toast.makeText(getApplicationContext(),"Cannot connect, please check internet connection",Toast.LENGTH_LONG).show();
+        }
 
         //Add a marker to searched location
 		

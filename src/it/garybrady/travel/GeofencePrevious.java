@@ -26,6 +26,7 @@ public class GeofencePrevious extends ListActivity {
 
         previousGeo=(ListView)findViewById(android.R.id.list);
         header = View.inflate(this,R.layout.list_view_header,null);
+
         previousGeo.addHeaderView(header);
         fillData();
         registerListClickCallback();
@@ -49,7 +50,7 @@ public class GeofencePrevious extends ListActivity {
                 new SimpleCursorAdapter(this, R.layout.geofence_titles, c, from, to);
         previousGeo.setAdapter(notes);
         if (!c.moveToFirst()){
-            Toast.makeText(getApplicationContext(), "No Previous Geofences Found", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "No Previous Alarms Found", Toast.LENGTH_LONG).show();
 
         }
     }

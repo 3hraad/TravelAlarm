@@ -132,12 +132,13 @@ public class RegisterActivity extends Activity {
            tvEmail.setTextColor(Color.RED);
             x++;
         }
-        if (!usernameCheck(name)||name.length()<6){
+        if (!usernameCheck(name)||name.length()<6||name.contains(" ")){
             tvName.setTextColor(Color.RED);
             x++;
         }
         if (pass.length()<6){
             tvPassword.setTextColor(Color.RED);
+            tvPasswordRepeat.setTextColor(Color.RED);
             x++;
         }
         if (!repeat.equals(pass)){
@@ -213,7 +214,9 @@ public class RegisterActivity extends Activity {
                 temp=json.getString("id");
 
             }
-            Toast.makeText(getApplicationContext(),temp, Toast.LENGTH_LONG).show();
+            if (temp!=null){
+            Toast.makeText(getApplicationContext(),"Username Taken", Toast.LENGTH_LONG).show();
+            }
             return false;
 
         } catch (Exception e) {
