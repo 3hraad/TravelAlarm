@@ -183,8 +183,14 @@ public class MarkerMap extends FragmentActivity implements
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(MarkerMap.this, DialogCheckBusAlarm.class);
-                startActivityForResult(i,BUSCHECKER);
+                i.putExtra("refNum",selectedBus);
+                if (isNetworkAvailable()) {
 
+                    startActivityForResult(i,BUSCHECKER);
+                }else{
+                    Toast.makeText(getApplication(),"No network connection",Toast.LENGTH_LONG).show();
+
+                }
                 //Toast.makeText(getApplication(),"Functionality not completed",Toast.LENGTH_LONG).show();
 
 

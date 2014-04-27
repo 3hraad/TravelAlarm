@@ -20,6 +20,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.*;
 import com.google.android.gms.maps.model.*;
+import it.garybrady.traveldata.myDatabase;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -62,6 +63,7 @@ public class BestBusMap extends FragmentActivity implements
     private static final int GPS_ERRORDIALOG_REQUEST = 9001;
     @SuppressWarnings("unused")
     private static final int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9002;
+    private static final int BUSCHECKER = 3333;
     GoogleMap mMap;
     EditText et;
     String webStopRef="http://192.3.177.209/liveInfo.php?RefNo=";
@@ -72,6 +74,10 @@ public class BestBusMap extends FragmentActivity implements
     Button handle;
     private HashMap<String,String> HM;
     LatLng destination=null;
+    myDatabase dba = new myDatabase(this);
+    private AlarmManagerBroadcastReceiver alarm = new AlarmManagerBroadcastReceiver();
+
+    String busCheck, eta;
 
 
 
@@ -153,6 +159,38 @@ public class BestBusMap extends FragmentActivity implements
 
             }
         });
+        ImageView widgetSave = (ImageView) findViewById(R.id.ivWidgetSet);
+        widgetSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(selectedBus==null){
+                    Toast.makeText(getApplication(),"No Bus Selected",Toast.LENGTH_LONG).show();
+                }else{
+                    savePreferences("busRef",selectedBus);
+                    Toast.makeText(getApplication(),"Tap Widget to Update Information",Toast.LENGTH_LONG).show();
+
+                }
+            }
+        });
+
+        ImageView checkBusAlarm = (ImageView)findViewById(R.id.ivSetAlarm);
+        checkBusAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(BestBusMap.this, DialogCheckBusAlarm.class);
+                i.putExtra("refNum",selectedBus);
+                if (isNetworkAvailable()) {
+
+                    startActivityForResult(i,BUSCHECKER);
+                }else{
+                    Toast.makeText(getApplication(),"No network connection",Toast.LENGTH_LONG).show();
+
+                }
+                //Toast.makeText(getApplication(),"Functionality not completed",Toast.LENGTH_LONG).show();
+
+
+            }
+        });
 
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
@@ -217,6 +255,43 @@ public class BestBusMap extends FragmentActivity implements
         });
 
 
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == BUSCHECKER) {
+            if (data.hasExtra("eta")&& data.hasExtra("bus")){
+                eta= data.getExtras().getString("eta");
+                busCheck=data.getExtras().getString("bus");
+                dba.open();
+                dba.insertAlarm(busCheck,selectedBus,eta);
+                dba.close();
+                setAlarm();
+            }
+        }
+    }
+    public void setAlarm()
+    {
+        Context context = this.getApplicationContext();
+        if(alarm != null){
+            alarm.CancelAlarm(context);
+        }else{
+            Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+        }
+        if(alarm != null){
+            alarm.SetAlarm(context);
+        }else{
+            Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void savePreferences(String key, String value) {
+
+        SharedPreferences.Editor prefs = getSharedPreferences("busInfo", MODE_PRIVATE).edit();
+        prefs.putString(key, value);
+        prefs.commit();
+
+
+        //Toast.makeText(getApplicationContext(),"Functionality not completed",Toast.LENGTH_LONG).show();
 
     }
 

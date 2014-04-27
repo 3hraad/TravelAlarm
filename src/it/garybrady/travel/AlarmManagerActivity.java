@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class AlarmManagerActivity extends Activity {
@@ -18,13 +19,18 @@ public class AlarmManagerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarm_test);
         alarm = new AlarmManagerBroadcastReceiver();
-        Bundle b = getIntent().getExtras();
         NotificationManager notificationManager = getNotificationManager();
 
 
 
         notificationManager.cancel(1);
-
+        Button continueAlarm = (Button) findViewById(R.id.bContinueAlarm);
+        continueAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 
@@ -60,16 +66,11 @@ public class AlarmManagerActivity extends Activity {
         }else{
             Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
         }
+        finish();
     }
 
-    public void onetimeTimer(View view){
-        Context context = this.getApplicationContext();
-        if(alarm != null){
-            alarm.setOnetimeTimer(context);
-        }else{
-            Toast.makeText(context, "Alarm is null", Toast.LENGTH_SHORT).show();
-        }
-    }
+
+
 
 
 }

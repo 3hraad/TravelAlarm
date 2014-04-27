@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="it.garybrady.travel"
           android:versionCode="1"
-          android:versionName="Travel Alarm 1.5">
+          android:versionName="Travel Alarm 1.6">
     <uses-sdk
             android:minSdkVersion="16"
             android:targetSdkVersion="17" />
@@ -91,7 +91,7 @@
 
         <activity
                 android:name="it.garybrady.travel.MyActivity"
-                android:label="Travel Alarm v1.5"
+                android:label="Travel Alarm v1.6"
                 android:screenOrientation="portrait"
 
                 >
@@ -252,7 +252,9 @@
                 />
         <!--<activity android:name=".AlarmTest" android:label="Test Alarm"/>
 -->
-        <activity android:name=".AlarmManagerActivity" android:label="Test Alarm"/>
+        <activity android:name=".AlarmManagerActivity" android:label="Test Alarm"
+                  android:screenOrientation="portrait"
+                />
         <activity android:name=".AlarmStopRepeating" android:label="Travel Alarm"/>
         <activity android:name=".AlarmContinueRepeating" android:label="Travel Alarm"/>
 

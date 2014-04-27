@@ -4,17 +4,13 @@
               xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools">
 
-    <Button android:id="@+id/btStart" android:layout_height="wrap_content"
-            android:layout_width="match_parent" android:onClick="startRepeatingTimer"
-             android:text="startRepeatingTimer"
+    <Button android:id="@+id/bContinueAlarm" android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+             android:text="Continue Alarm"
             tools:context=".WidgetAlarmManagerActivity"/>
     <Button android:id="@+id/btCancel" android:layout_height="wrap_content"
             android:layout_width="match_parent" android:onClick="cancelRepeatingTimer"
-             android:text="cancelRepeatingTimer"
+             android:text="Stop Alarm"
             tools:context=".WidgetAlarmManagerActivity"/>
-    <Button android:id="@+id/btOneTime" android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:onClick="onetimeTimer"
-            android:text="onetimeTimer"
-            tools:context=".WidgetAlarmManagerActivity"/>
+
 </LinearLayout>

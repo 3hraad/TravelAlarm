@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 public class TriggeredGeofence extends Activity {
     MediaPlayer mp;
+    Vibrator vibrator;
     int geoIDs[];
     String array[];
     String received;
@@ -55,12 +57,19 @@ public class TriggeredGeofence extends Activity {
 
         }
         if (realAlarms>0){
-            mp = MediaPlayer.create(this, R.raw.audio);
+            mp = MediaPlayer.create(this, R.raw.ring);
+            mp.setLooping(true);
             mp.start();
+
+            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+            vibrator.vibrate(new long[] { 500, 500 },0);
+
+
             bStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mp.stop();
+                vibrator.cancel();
                 if(bStop.getText()=="Back To Menu"){
                     Intent i = new Intent(TriggeredGeofence.this,MyActivity.class);
                     startActivity(i);

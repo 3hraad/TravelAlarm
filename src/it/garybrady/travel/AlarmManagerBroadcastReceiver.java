@@ -3,6 +3,7 @@ package it.garybrady.travel;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,6 +15,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -71,7 +73,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         info=dba.getMostRecentAlarm();
         dba.close();
         new loadBusTimeInfo(info[1]).execute();
-        //Toast.makeText(context, info[0]+info[1]+info[2], Toast.LENGTH_LONG).show();
+        Toast.makeText(context, info[0]+info[1]+info[2], Toast.LENGTH_LONG).show();
         notificationDeets = "The "+String.valueOf(info[0])+" is leaving in "+String.valueOf(info[2]);
 
         //Release the lock
@@ -85,7 +87,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         intent.putExtra(ONE_TIME, Boolean.FALSE);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
         //After 30 seconds
-        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 20 , pi);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 45 , pi);
     }
 
     public void CancelAlarm(Context context)
@@ -220,14 +222,21 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         repeat.putInt("repeat", 33);
         repeatCheck.putExtras(repeat);
         //repeatCheck.putExtra("repeat", 33);
+        Uri path = Uri.parse("android.resource://it.garybrady.travel/" + R.raw.ring);
+        Intent manage=new Intent(c,AlarmManagerActivity.class);
+        PendingIntent piStop = PendingIntent.getActivity(c, 0, manage,
+                PendingIntent.FLAG_CANCEL_CURRENT);
 
         Notification.Builder notificationBuilder  = new Notification.Builder(c)  //using the Notification.Builder class
-                .setContentTitle("Travel Alarm")
-                .setContentText(notificationDeets)
+                .setContentTitle(notificationDeets)
+                .setContentText("Tap to manage alarm")
                 .setSmallIcon(R.drawable.ic_launcher)
-                        .setAutoCancel(true)
+                .setAutoCancel(true)
+                .setSound(path)
+                .setVibrate(new long[] { 1000, 200, 1000, 200, 1000 })
+                .setContentIntent(piStop)
 
-                //.setOngoing(true)
+                        //.setOngoing(true)
 //                .setPriority(Notification.PRIORITY_HIGH)
 
 
@@ -251,7 +260,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
         // Get an instance of the NotificationManager service
         // Get an instance of the NotificationManager service
-       // NotificationManagerCompat notificationManager = NotificationManagerCompat.from(c);
+        // NotificationManagerCompat notificationManager = NotificationManagerCompat.from(c);
         notificationManager.notify(1, notificationBuilder.build());
     }
 
