@@ -1,5 +1,9 @@
 package it.garybrady.travel;
 
+/*
+* All active geofences
+* If user clicks one, they have the option to remove it
+* */
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;

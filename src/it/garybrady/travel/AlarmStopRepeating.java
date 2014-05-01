@@ -1,5 +1,10 @@
 package it.garybrady.travel;
 
+/*
+* Called when user cancels bus alarm,
+* Gets rid of notification
+* Cancels bus alarm
+* */
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;

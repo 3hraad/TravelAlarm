@@ -1,5 +1,8 @@
 package it.garybrady.travel;
-
+ /*
+ * Called when user wants bus alarm to continue
+ * Does nothing but remove notification
+ * */
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;

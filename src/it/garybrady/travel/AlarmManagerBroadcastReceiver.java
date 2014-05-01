@@ -1,5 +1,8 @@
 package it.garybrady.travel;
-
+ /*
+ * Checks bus info against users alarm
+ * creates notification to ring bus alarm
+ * */
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -236,8 +239,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 .setVibrate(new long[] { 1000, 200, 1000, 200, 1000 })
                 .setContentIntent(piStop)
 
-                        //.setOngoing(true)
-//                .setPriority(Notification.PRIORITY_HIGH)
+                //Actions to show in notification and wear device
 
 
                 .addAction(

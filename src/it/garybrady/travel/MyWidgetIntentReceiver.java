@@ -1,5 +1,9 @@
 package it.garybrady.travel;
-
+ /*
+ * Called when user taps widget
+ * Gets info from shared prefrences
+ * Calls server for info
+ * */
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

@@ -1,5 +1,7 @@
 package it.garybrady.travel;
-
+ /*
+ * Activity that is called from reciveTransitionIntentService
+ * */
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;

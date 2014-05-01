@@ -49,13 +49,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * UI handler for the Location Services Geofence sample app.
- * Allow input of latitude, longitude, and radius for two geofences.
- * When registering geofences, check input and then send the geofences to Location Services.
- * Also allow removing either one of or both of the geofences.
- * The menu allows you to clear the screen or delete the geofences stored in persistent memory.
- */
+
 public class LongGeofence extends FragmentActivity {
     /*
      * Use to set an expiration time for a geofence. After this amount

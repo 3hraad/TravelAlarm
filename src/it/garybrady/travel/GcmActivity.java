@@ -1,5 +1,8 @@
 package it.garybrady.travel;
 
+/*
+* Attempts to register user for GCM
+* */
 /**
  * Created by Gary on 27/02/14.
  */
@@ -31,21 +34,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class GcmActivity extends Activity {
-    // label to display gcm messages
-    TextView lblMessage;
-
-    // Asyntask
     AsyncTask<Void, Void, Void> mRegisterTask;
 
-    // Alert dialog manager
+
     AlertDialogManager alert = new AlertDialogManager();
 
-    // Connection detector
     ConnectionDetector cd;
 
     public static String name;
+
     public static String email;
     public static String password;
+    TextView lblMessage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -1,5 +1,8 @@
 package it.garybrady.travel;
 
+/*
+* Bus picker for bus stop times
+* */
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

@@ -20,17 +20,6 @@ import android.util.Log;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Class for connecting to Location Services and removing geofences.
- * <p>
- * <b>
- * Note: Clients must ensure that Google Play services is available before removing geofences.
- * </b> Use GooglePlayServicesUtil.isGooglePlayServicesAvailable() to check.
- * <p>
- * To use a GeofenceRemover, instantiate it, then call either RemoveGeofencesById() or
- * RemoveGeofencesByIntent(). Everything else is done automatically.
- *
- */
 public class GeofenceRemover implements
             ConnectionCallbacks,
             OnConnectionFailedListener,

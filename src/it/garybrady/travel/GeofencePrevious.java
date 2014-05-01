@@ -1,5 +1,8 @@
 package it.garybrady.travel;
-
+           /*
+           *Displays all previous geofences in listview
+            * If clicked opens geofence map to re use geofence
+           * */
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;

@@ -50,23 +50,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * UI handler for the Location Services Geofence sample app.
- * Allow input of latitude, longitude, and radius for two geofences.
- * When registering geofences, check input and then send the geofences to Location Services.
- * Also allow removing either one of or both of the geofences.
- * The menu allows you to clear the screen or delete the geofences stored in persistent memory.
- */
+
 public class GeofenceConstruct extends FragmentActivity {
-    /*
-     * Use to set an expiration time for a geofence. After this amount
-     * of time Location Services will stop tracking the geofence.
-     * Remember to unregister a geofence when you're finished with it.
-     * Otherwise, your app will use up battery. To continue monitoring
-     * a geofence indefinitely, set the expiration time to
-     * Geofence#NEVER_EXPIRE.
-     */
-    private static final long GEOFENCE_EXPIRATION_IN_HOURS = 12;
+
+    private static final long GEOFENCE_EXPIRATION_IN_HOURS = 24;
     private static final long GEOFENCE_EXPIRATION_IN_MILLISECONDS =
             GEOFENCE_EXPIRATION_IN_HOURS * DateUtils.HOUR_IN_MILLIS;
 
@@ -90,10 +77,8 @@ public class GeofenceConstruct extends FragmentActivity {
     private EditText mLatitude1;
     private long plat;
 
-    // Handle to geofence 1 longitude in the UI
     private EditText mLongitude1;
     private long plng;
-    // Handle to geofence 1 radius in the UI
     private EditText mRadius1;
     private float prad;
 
@@ -301,86 +286,18 @@ public class GeofenceConstruct extends FragmentActivity {
         super.onResume();
         // Register the broadcast receiver to receive status updates
         LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, mIntentFilter);
-        /*
-         * Get existing geofences from the latitude, longitude, and
-         * radius values stored in SharedPreferences. If no values
-         * exist, null is returned.
-         */
-      /*  mUIGeofence1 = mPrefs.getGeofence("1");
-        *//*
-         * If the returned geofences have values, use them to set
-         * values in the UI, using the previously-defined number
-         * formats.
-         *//*
-        if (mUIGeofence1 != null) {
-            mLatitude1.setText(
-                    mLatLngFormat.format(
-                            mUIGeofence1.getLatitude()));
-            mLongitude1.setText(
-                    mLatLngFormat.format(
-                            mUIGeofence1.getLongitude()));
-            mRadius1.setText(
-                    mRadiusFormat.format(
-                            mUIGeofence1.getRadius()));
-        }*/
+
 
     }
 
-    /*
-     * Inflate the app menu
-     */
- /*   @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-
-    }*/
-    /*
-     * Respond to menu item selections
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-
-            // Request to clear the geofence1 settings in the UI
-            case R.id.menu_item_clear_geofence1:
-                mLatitude1.setText(GeofenceUtils.EMPTY_STRING);
-                mLongitude1.setText(GeofenceUtils.EMPTY_STRING);
-                mRadius1.setText(GeofenceUtils.EMPTY_STRING);
-                return true;
 
 
 
-            // Request to clear both geofence settings in the UI
-            case R.id.menu_item_clear_geofences:
-                mLatitude1.setText(GeofenceUtils.EMPTY_STRING);
-                mLongitude1.setText(GeofenceUtils.EMPTY_STRING);
-                mRadius1.setText(GeofenceUtils.EMPTY_STRING);
 
-
-                return true;
-
-            // Remove all geofences from storage
-            case R.id.menu_item_clear_geofence_history:
-                mPrefs.clearGeofence("1");
-                return true;
-
-            // Pass through any other request
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /*
-     * Save the current geofence settings in SharedPreferences.
-     */
     @Override
     protected void onPause() {
         super.onPause();
-       // mPrefs.setGeofence("1", mUIGeofence1);
-        //dba.close();
+
     }
 
     /**
@@ -417,163 +334,7 @@ public class GeofenceConstruct extends FragmentActivity {
         }
     }
 
-    /**
-     * Called when the user clicks the "Remove geofences" button
-     *
-     * @param view The view that triggered this callback
-     */
-    public void onUnregisterByPendingIntentClicked(View view) {
-        /*
-         * Remove all geofences set by this app. To do this, get the
-         * PendingIntent that was added when the geofences were added
-         * and use it as an argument to removeGeofences(). The removal
-         * happens asynchronously; Location Services calls
-         * onRemoveGeofencesByPendingIntentResult() (implemented in
-         * the current Activity) when the removal is done
-         */
 
-        /*
-         * Record the removal as remove by Intent. If a connection error occurs,
-         * the app can automatically restart the removal if Google Play services
-         * can fix the error
-         */
-        // Record the type of removal
-        mRemoveType = GeofenceUtils.REMOVE_TYPE.INTENT;
-
-        /*
-         * Check for Google Play services. Do this after
-         * setting the request type. If connecting to Google Play services
-         * fails, onActivityResult is eventually called, and it needs to
-         * know what type of request was in progress.
-         */
-        if (!servicesConnected()) {
-
-            return;
-        }
-
-        // Try to make a removal request
-        try {
-        /*
-         * Remove the geofences represented by the currently-active PendingIntent. If the
-         * PendingIntent was removed for some reason, re-create it; since it's always
-         * created with FLAG_UPDATE_CURRENT, an identical PendingIntent is always created.
-         */
-            mGeofenceRemover.removeGeofencesByIntent(mGeofenceRequester.getRequestPendingIntent());
-
-        } catch (UnsupportedOperationException e) {
-            // Notify user that previous request hasn't finished.
-            Toast.makeText(this, R.string.remove_geofences_already_requested_error,
-                    Toast.LENGTH_LONG).show();
-        }
-
-    }
-
-    /**
-     * Called when the user clicks the "Remove geofence 1" button
-     * @param view The view that triggered this callback
-     */
-    public void onUnregisterGeofence1Clicked(View view) {
-        /*
-         * Remove the geofence by creating a List of geofences to
-         * remove and sending it to Location Services. The List
-         * contains the id of geofence 1 ("1").
-         * The removal happens asynchronously; Location Services calls
-         * onRemoveGeofencesByPendingIntentResult() (implemented in
-         * the current Activity) when the removal is done.
-         */
-
-        // Create a List of 1 Geofence with the ID "1" and store it in the global list
-        mGeofenceIdsToRemove = Collections.singletonList("1");
-
-        /*
-         * Record the removal as remove by list. If a connection error occurs,
-         * the app can automatically restart the removal if Google Play services
-         * can fix the error
-         */
-        mRemoveType = GeofenceUtils.REMOVE_TYPE.LIST;
-
-        /*
-         * Check for Google Play services. Do this after
-         * setting the request type. If connecting to Google Play services
-         * fails, onActivityResult is eventually called, and it needs to
-         * know what type of request was in progress.
-         */
-        if (!servicesConnected()) {
-
-            return;
-        }
-
-        // Try to remove the geofence
-        try {
-            mGeofenceRemover.removeGeofencesById(mGeofenceIdsToRemove);
-
-            // Catch errors with the provided geofence IDs
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (UnsupportedOperationException e) {
-            // Notify user that previous request hasn't finished.
-            Toast.makeText(this, R.string.remove_geofences_already_requested_error,
-                    Toast.LENGTH_LONG).show();
-        }
-    }
-
-    /**
-     * Called when the user clicks the "Remove geofence 2" button
-     * @param view The view that triggered this callback
-     */
-    public void onUnregisterGeofence2Clicked(View view) {
-        /*
-         * Remove the geofence by creating a List of geofences to
-         * remove and sending it to Location Services. The List
-         * contains the id of geofence 2, which is "2".
-         * The removal happens asynchronously; Location Services calls
-         * onRemoveGeofencesByPendingIntentResult() (implemented in
-         * the current Activity) when the removal is done.
-         */
-
-        /*
-         * Record the removal as remove by list. If a connection error occurs,
-         * the app can automatically restart the removal if Google Play services
-         * can fix the error
-         */
-        mRemoveType = GeofenceUtils.REMOVE_TYPE.LIST;
-
-        // Create a List of 1 Geofence with the ID "2" and store it in the global list
-        mGeofenceIdsToRemove = Collections.singletonList("2");
-
-        /*
-         * Check for Google Play services. Do this after
-         * setting the request type. If connecting to Google Play services
-         * fails, onActivityResult is eventually called, and it needs to
-         * know what type of request was in progress.
-         */
-        if (!servicesConnected()) {
-
-            return;
-        }
-
-        // Try to remove the geofence
-        try {
-            mGeofenceRemover.removeGeofencesById(mGeofenceIdsToRemove);
-
-            // Catch errors with the provided geofence IDs
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (UnsupportedOperationException e) {
-            // Notify user that previous request hasn't finished.
-            Toast.makeText(this, R.string.remove_geofences_already_requested_error,
-                    Toast.LENGTH_LONG).show();
-        }
-    }
-
-    /**
-     * Called when the user clicks the "Register geofences" button.
-     * Get the geofence parameters for each geofence and add them to
-     * a List. Create the PendingIntent containing an Intent that
-     * Location Services sends to this app's broadcast receiver when
-     * Location Services detects a geofence transition. Send the List
-     * and the PendingIntent to Location Services.
-     */
     public void onRegisterClicked(View view) {
 
         /*

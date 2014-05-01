@@ -1,5 +1,10 @@
 package it.garybrady.travel;
-
+ /*
+ * Map Activity For best bus stop
+ * Calls function in cloud to find closest stop to chosen bus stop
+ * calls it twice, closest bus to there current location
+ * calls it again when user sets a destination
+ * */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

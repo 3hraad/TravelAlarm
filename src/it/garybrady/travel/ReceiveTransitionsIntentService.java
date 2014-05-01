@@ -1,22 +1,18 @@
 package it.garybrady.travel;
-
-import android.app.Notification;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.widget.Toast;
-import com.google.android.gms.location.Geofence;
-import com.google.android.gms.location.LocationClient;
+/*
+* Called when user trigger geofence
+* Starts TriggeredGeofence class
+* */
 
 import android.app.IntentService;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
+import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.LocationClient;
 import it.garybrady.traveldata.myDatabase;
 
 import java.util.List;
@@ -146,50 +142,7 @@ public class ReceiveTransitionsIntentService extends IntentService {
 
     }
 
-    /**
-     * Posts a notification in the notification bar when a transition is detected.
-     * If the user clicks the notification, control goes to the main Activity.
-     * @param transitionType The type of transition that occurred.
-     *
-     */
-  /*  private void sendNotification(String transitionType, String ids) {
 
-        // Create an explicit content Intent that starts the main Activity
-        Intent notificationIntent =
-                new Intent(getApplicationContext(),MainActivity.class);
-
-        // Construct a task stack
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-
-        // Adds the main Activity to the task stack as the parent
-        stackBuilder.addParentStack(MainActivity.class);
-
-        // Push the content Intent onto the stack
-        stackBuilder.addNextIntent(notificationIntent);
-
-        // Get a PendingIntent containing the entire back stack
-        PendingIntent notificationPendingIntent =
-                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        // Get a notification builder that's compatible with platform versions >= 4
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-
-        // Set the notification contents
-        builder.setSmallIcon(R.drawable.ic_notification)
-               .setContentTitle(
-                       getString(R.string.geofence_transition_notification_title,
-                               transitionType, ids))
-               .setContentText(getString(R.string.geofence_transition_notification_text))
-               .setContentIntent(notificationPendingIntent);
-
-        // Get an instance of the Notification manager
-        NotificationManager mNotificationManager =
-            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        // Issue the notification
-        mNotificationManager.notify(0, builder.build());
-    }
-*/
     /**
      * Maps geofence transition types to their human-readable equivalents.
      * @param transitionType A transition type constant defined in Geofence

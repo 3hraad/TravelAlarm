@@ -1,5 +1,9 @@
 package it.garybrady.travel;
-
+         /*
+         * Lets users register for GCM
+         * Check all fields before progressing
+         * Stops duplicate username
+         * */
 /**
  * Created by Gary on 27/02/14.
  */

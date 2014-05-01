@@ -1,5 +1,8 @@
 package it.garybrady.travel;
-
+     /*
+     * Called if user clicks notification from bus alarm
+     * Allows them to stop or repeat bus alarm
+     * */
 /**
  * Created by Gary on 14/04/14.
  */

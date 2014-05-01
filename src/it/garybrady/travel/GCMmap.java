@@ -1,5 +1,10 @@
 package it.garybrady.travel;
 
+
+/*
+* When a user receives message from GCM
+* Opens this activity and tries to display destination
+* */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

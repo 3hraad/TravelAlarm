@@ -1,5 +1,7 @@
 package it.garybrady.travel;
-
+ /*
+ * Bus stop info map, requests info from server
+ * */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

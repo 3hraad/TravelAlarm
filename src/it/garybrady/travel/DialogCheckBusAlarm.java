@@ -1,5 +1,8 @@
 package it.garybrady.travel;
-
+ /*
+ * Activity that lets user set bus alarm
+ * Pulls down array for available buses for stop chosen
+ * */
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

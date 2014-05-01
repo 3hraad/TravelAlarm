@@ -1,5 +1,8 @@
 package it.garybrady.travel;
 
+/*
+* Stores info about map when it is closed or interupted
+* */
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;

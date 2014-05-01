@@ -1,4 +1,7 @@
 package it.garybrady.travel;
+/*
+* Sets up action for widget
+* */
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
